@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="c"><rect width="32" height="32" rx="6"/></clipPath>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="#0a1628"/>
+  <g clip-path="url(#c)" fill="#c9a84c">
+    <!-- A: left leg -->
+    <polygon points="1,29 3.5,29 8.5,5 6,5"/>
+    <!-- A: right leg -->
+    <polygon points="8.5,5 11,5 13.5,29 11,29"/>
+    <!-- A: crossbar -->
+    <rect x="3.5" y="18" width="8" height="2.5"/>
+    <!-- M: left leg -->
+    <rect x="15" y="5" width="2.5" height="24"/>
+    <!-- M: right leg -->
+    <rect x="28.5" y="5" width="2.5" height="24"/>
+    <!-- M: left diagonal -->
+    <polygon points="17.5,5 20,5 22,17 19.5,17"/>
+    <!-- M: right diagonal -->
+    <polygon points="26,5 28.5,5 27,17 24.5,17"/>
+  </g>
+</svg>

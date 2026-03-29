@@ -1,0 +1,524 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Style Guide — Anurag Mohapatra</title>
+<meta name="description" content="Brand identity, colors, typography, and design guidelines for Anurag Mohapatra.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anuragmohapatra.com/brand_style_guide.html">
+<meta property="og:title" content="Brand Style Guide — Anurag Mohapatra">
+<meta property="og:description" content="Brand identity, colors, typography, and design guidelines for Anurag Mohapatra.">
+<meta property="og:image" content="https://anuragmohapatra.com/favicon-180.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Brand Style Guide — Anurag Mohapatra">
+<meta name="twitter:description" content="Brand identity, colors, typography, and design guidelines for Anurag Mohapatra.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0a1628;--navy-mid:#142240;--gold:#c9a84c;--gold-light:#e8d4a0;
+  --white:#ffffff;--off:#f8f7f4;--ink:#1a1a18;--muted:#6b6b67;--border:#e2e0d8;
+  --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;
+}
+body{font-family:var(--sans);background:var(--white);color:var(--ink);line-height:1.6;max-width:900px;margin:0 auto;padding:2rem 2rem 4rem;}
+
+/* HEADER */
+.sg-header{background:var(--navy);border-radius:6px;padding:2.5rem;margin-bottom:2.5rem;}
+.sg-eyebrow{font-size:10px;color:var(--gold);font-weight:500;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:8px;}
+.sg-title{font-family:var(--serif);font-size:36px;font-weight:600;color:#fff;margin-bottom:6px;}
+.sg-sub{font-size:13px;color:#8fa3c7;line-height:1.6;}
+.sg-version{font-size:10px;color:#8fa3c7;margin-top:12px;padding-top:12px;border-top:0.5px solid rgba(255,255,255,0.1);}
+
+/* SECTION */
+.section{margin-bottom:2.5rem;}
+.section-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px;padding-bottom:10px;border-bottom:2px solid var(--border);}
+.section-sub{font-size:13px;color:var(--muted);margin-bottom:1.25rem;margin-top:6px;}
+
+/* COLOUR SWATCHES */
+.swatch-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1rem;}
+.swatch{border-radius:4px;overflow:hidden;border:0.5px solid var(--border);}
+.swatch-color{height:72px;}
+.swatch-info{padding:10px 12px;background:var(--white);}
+.swatch-name{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:2px;}
+.swatch-hex{font-family:monospace;font-size:11px;color:var(--muted);}
+.swatch-use{font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4;}
+
+/* CANVA HEX REFERENCE */
+.hex-table{width:100%;border:0.5px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:1rem;}
+.hex-row{display:grid;grid-template-columns:16px 1fr 120px 1fr;gap:12px;padding:9px 1rem;border-bottom:0.5px solid var(--border);align-items:center;}
+.hex-row:last-child{border-bottom:none;}
+.hex-row.header{background:var(--off);font-size:10px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+.hex-dot{width:16px;height:16px;border-radius:3px;flex-shrink:0;}
+.hex-label{font-size:12px;font-weight:500;color:var(--ink);}
+.hex-code{font-family:monospace;font-size:12px;color:var(--ink);background:var(--off);padding:3px 8px;border-radius:3px;border:0.5px solid var(--border);}
+.hex-use{font-size:11px;color:var(--muted);}
+
+/* TYPOGRAPHY */
+.type-block{border:0.5px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:10px;}
+.type-preview{padding:1.5rem;border-bottom:0.5px solid var(--border);}
+.type-meta{padding:10px 1rem;background:var(--off);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;}
+.tm-item{font-size:11px;}
+.tm-label{color:var(--muted);margin-bottom:2px;}
+.tm-value{font-weight:500;color:var(--ink);font-family:monospace;font-size:11px;}
+
+/* LOGO RULES */
+.logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem;}
+.logo-card{border:0.5px solid var(--border);border-radius:4px;overflow:hidden;}
+.logo-preview{padding:2rem;display:flex;align-items:center;justify-content:center;}
+.logo-rule{padding:10px 1rem;background:var(--off);border-top:0.5px solid var(--border);font-size:11px;color:var(--muted);}
+.logo-rule strong{color:var(--ink);}
+
+/* CANVA SETUP STEPS */
+.steps-list{counter-reset:steps;display:flex;flex-direction:column;gap:0;}
+.step-item{display:grid;grid-template-columns:32px 1fr;gap:0;border-bottom:0.5px solid var(--border);}
+.step-item:last-child{border-bottom:none;}
+.step-num{counter-increment:steps;width:32px;padding:1rem 0;display:flex;align-items:flex-start;justify-content:center;font-size:11px;font-weight:500;color:var(--gold);padding-top:1.1rem;}
+.step-body{padding:1rem 0 1rem 0;}
+.step-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.65;}
+.step-code{font-family:monospace;font-size:11px;background:var(--off);border:0.5px solid var(--border);padding:4px 8px;border-radius:3px;display:inline-block;margin-top:4px;color:var(--ink);}
+
+/* INFOGRAPHIC TEMPLATES */
+.template-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem;}
+.template-card{border:0.5px solid var(--border);border-radius:4px;background:var(--card);overflow:hidden;}
+.template-preview{height:140px;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.template-info{padding:10px 1rem;border-top:0.5px solid var(--border);}
+.ti-name{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:2px;}
+.ti-dims{font-size:10px;color:var(--muted);}
+
+/* PODCAST COVER */
+.podcast-spec{border:0.5px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:1rem;}
+.ps-preview{background:var(--navy);padding:2rem;display:flex;gap:2rem;align-items:center;}
+.ps-mock{width:100px;height:100px;border-radius:8px;background:#1e3050;border:1px solid rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ps-mock-inner{text-align:center;}
+.ps-mock-ai{font-family:var(--serif);font-size:10px;color:#8fa3c7;letter-spacing:0.15em;display:block;}
+.ps-mock-spy{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--gold);line-height:1;display:block;}
+.ps-notes{flex:1;}
+.ps-note{font-size:12px;color:#8fa3c7;line-height:1.7;padding:3px 0;}
+.ps-note strong{color:#fff;}
+.ps-specs{display:grid;grid-template-columns:repeat(4,1fr);background:var(--off);border-top:0.5px solid var(--border);}
+.ps-spec{padding:10px 1rem;border-right:0.5px solid var(--border);font-size:11px;}
+.ps-spec:last-child{border-right:none;}
+.ps-spec-label{color:var(--muted);margin-bottom:2px;}
+.ps-spec-val{font-weight:500;color:var(--ink);font-family:monospace;}
+
+/* DO / DONT */
+.dodonts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem;}
+.do-card{border:0.5px solid #9FE1CB;border-radius:4px;overflow:hidden;}
+.dont-card{border:0.5px solid #F0997B;border-radius:4px;overflow:hidden;}
+.dd-header{padding:8px 1rem;font-size:11px;font-weight:500;letter-spacing:0.06em;}
+.do-header{background:#E1F5EE;color:#0F6E56;}
+.dont-header{background:#FAECE7;color:#993C1D;}
+.dd-body{padding:0.75rem 1rem;}
+.dd-item{font-size:12px;color:var(--muted);padding:4px 0 4px 14px;border-bottom:0.5px solid var(--border);position:relative;line-height:1.55;}
+.dd-item:last-child{border-bottom:none;}
+.dd-item::before{position:absolute;left:0;font-size:11px;}
+.do-item::before{content:'✓';color:#0F6E56;}
+.dont-item::before{content:'✗';color:#993C1D;}
+
+/* PRINT STYLES */
+@media print{
+  body{max-width:100%;padding:1rem;}
+  .sg-header{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .swatch-color{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .hex-dot{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="9beab7ec-4fca-460f-9ca6-0f071befbdb1"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="sg-header">
+  <div class="sg-eyebrow">Brand Identity</div>
+  <div class="sg-title">Anurag Mohapatra<br>Style Guide</div>
+  <div class="sg-sub">Visual identity for anuragmohapatra.com — infographics, podcast artwork, and all branded content. Use this guide when designing in Canva or any other tool to ensure consistency across every touchpoint.</div>
+  <div class="sg-version">Version 1.0 &nbsp;&middot;&nbsp; March 2026 &nbsp;&middot;&nbsp; anuragmohapatra.com</div>
+</div>
+
+<!-- COLOUR PALETTE -->
+<div class="section">
+  <div class="section-title">Colour palette</div>
+  <div class="section-sub">Five colours make up the entire brand. Use them in this order of dominance — Navy first, then Off-white, then Gold as the accent.</div>
+
+  <div class="swatch-row">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0a1628;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Navy</div>
+        <div class="swatch-hex">#0a1628</div>
+        <div class="swatch-use">Primary background, headers, dark sections</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#c9a84c;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Gold</div>
+        <div class="swatch-hex">#c9a84c</div>
+        <div class="swatch-use">Accent, highlights, key labels</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#f8f7f4;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Off-white</div>
+        <div class="swatch-hex">#f8f7f4</div>
+        <div class="swatch-use">Light backgrounds, cards, surfaces</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#1a1a18;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Ink</div>
+        <div class="swatch-hex">#1a1a18</div>
+        <div class="swatch-use">Body text, headlines on light backgrounds</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#6b6b67;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Muted</div>
+        <div class="swatch-hex">#6b6b67</div>
+        <div class="swatch-use">Secondary text, captions, metadata</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sub" style="margin-bottom:0.75rem;">Canva hex codes — copy these exactly into the colour picker</div>
+  <div class="hex-table">
+    <div class="hex-row header">
+      <div></div>
+      <div>Colour name</div>
+      <div>Hex code</div>
+      <div>When to use in Canva</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#0a1628;"></div>
+      <div class="hex-label">Navy (primary)</div>
+      <div class="hex-code">#0a1628</div>
+      <div class="hex-use">Backgrounds, headers, dark panels, podcast artwork background</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#c9a84c;"></div>
+      <div class="hex-label">Gold (accent)</div>
+      <div class="hex-code">#c9a84c</div>
+      <div class="hex-use">Key stats, callouts, borders, icon accents, labels</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#142240;"></div>
+      <div class="hex-label">Navy mid</div>
+      <div class="hex-code">#142240</div>
+      <div class="hex-use">Secondary dark panels, layered backgrounds</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#e8d4a0;"></div>
+      <div class="hex-label">Gold light</div>
+      <div class="hex-code">#e8d4a0</div>
+      <div class="hex-use">Soft accents, icon fills on dark backgrounds</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#f8f7f4;"></div>
+      <div class="hex-label">Off-white</div>
+      <div class="hex-code">#f8f7f4</div>
+      <div class="hex-use">Light infographic backgrounds, card fills</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#1a1a18;"></div>
+      <div class="hex-label">Ink (text)</div>
+      <div class="hex-code">#1a1a18</div>
+      <div class="hex-use">All body text and headlines on light backgrounds</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#6b6b67;border:0.5px solid #e2e0d8;"></div>
+      <div class="hex-label">Muted (text)</div>
+      <div class="hex-code">#6b6b67</div>
+      <div class="hex-use">Captions, secondary labels, source attributions</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#e2e0d8;"></div>
+      <div class="hex-label">Border</div>
+      <div class="hex-code">#e2e0d8</div>
+      <div class="hex-use">Dividers, card borders, subtle separators</div>
+    </div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="section">
+  <div class="section-title">Typography</div>
+  <div class="section-sub">Two fonts only. Playfair Display for headlines and display text. DM Sans for all body copy, labels, and UI text. Both are free on Google Fonts and available in Canva.</div>
+
+  <div class="type-block">
+    <div class="type-preview">
+      <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:#0a1628;line-height:1.1;">Playfair Display</div>
+      <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:#6b6b67;margin-top:6px;font-style:italic;">Headlines &middot; Titles &middot; Pull quotes</div>
+    </div>
+    <div class="type-meta">
+      <div class="tm-item"><div class="tm-label">Font</div><div class="tm-value">Playfair Display</div></div>
+      <div class="tm-item"><div class="tm-label">Weights used</div><div class="tm-value">400 Regular, 600 SemiBold</div></div>
+      <div class="tm-item"><div class="tm-label">Use for</div><div class="tm-value">Headlines, titles, quotes</div></div>
+      <div class="tm-item"><div class="tm-label">Canva availability</div><div class="tm-value">Free — search "Playfair Display"</div></div>
+    </div>
+  </div>
+
+  <div class="type-block">
+    <div class="type-preview">
+      <div style="font-family:'DM Sans',sans-serif;font-size:28px;font-weight:500;color:#1a1a18;">DM Sans</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;color:#6b6b67;margin-top:6px;">Body copy &middot; Labels &middot; Stats &middot; Captions &middot; Data points</div>
+    </div>
+    <div class="type-meta">
+      <div class="tm-item"><div class="tm-label">Font</div><div class="tm-value">DM Sans</div></div>
+      <div class="tm-item"><div class="tm-label">Weights used</div><div class="tm-value">400 Regular, 500 Medium</div></div>
+      <div class="tm-item"><div class="tm-label">Use for</div><div class="tm-value">Body, labels, stats, UI text</div></div>
+      <div class="tm-item"><div class="tm-label">Canva availability</div><div class="tm-value">Free — search "DM Sans"</div></div>
+    </div>
+  </div>
+
+  <div class="section-sub" style="margin-top:1rem;margin-bottom:0.75rem;">Type scale for infographics</div>
+  <div class="hex-table">
+    <div class="hex-row header">
+      <div></div>
+      <div>Element</div>
+      <div>Font / Size</div>
+      <div>Colour</div>
+    </div>
+    <div class="hex-row">
+      <div></div>
+      <div class="hex-label">Infographic headline</div>
+      <div class="hex-code" style="font-size:10px;">Playfair Display 600 / 28–36px</div>
+      <div class="hex-use">#0a1628 on light &nbsp;/&nbsp; #ffffff on dark</div>
+    </div>
+    <div class="hex-row">
+      <div></div>
+      <div class="hex-label">Section heading</div>
+      <div class="hex-code" style="font-size:10px;">DM Sans 500 / 16–20px</div>
+      <div class="hex-use">#0a1628 or #c9a84c</div>
+    </div>
+    <div class="hex-row">
+      <div></div>
+      <div class="hex-label">Stat / big number</div>
+      <div class="hex-code" style="font-size:10px;">Playfair Display 600 / 40–60px</div>
+      <div class="hex-use">#0a1628 or #c9a84c</div>
+    </div>
+    <div class="hex-row">
+      <div></div>
+      <div class="hex-label">Body / description</div>
+      <div class="hex-code" style="font-size:10px;">DM Sans 400 / 12–14px</div>
+      <div class="hex-use">#1a1a18 or #6b6b67</div>
+    </div>
+    <div class="hex-row">
+      <div></div>
+      <div class="hex-label">Label / eyebrow</div>
+      <div class="hex-code" style="font-size:10px;">DM Sans 500 / 10px ALL CAPS</div>
+      <div class="hex-use">#c9a84c (gold) always</div>
+    </div>
+    <div class="hex-row">
+      <div></div>
+      <div class="hex-label">Source / caption</div>
+      <div class="hex-code" style="font-size:10px;">DM Sans 400 / 9–10px</div>
+      <div class="hex-use">#6b6b67 muted</div>
+    </div>
+  </div>
+</div>
+
+<!-- PODCAST ARTWORK SPEC -->
+<div class="section">
+  <div class="section-title">Podcast artwork spec — AI Spy</div>
+  <div class="section-sub">Spotify and Apple Podcasts require a square cover image. The existing hand-drawn AI Spy logo should remain the centrepiece. These are the exact specs and colour rules for any new artwork or seasonal variations.</div>
+
+  <div class="podcast-spec">
+    <div class="ps-preview">
+      <div class="ps-mock">
+        <div class="ps-mock-inner">
+          <span class="ps-mock-ai">AI</span>
+          <span class="ps-mock-spy">Spy</span>
+        </div>
+      </div>
+      <div class="ps-notes">
+        <div class="ps-note"><strong>Background:</strong> #0a1628 Navy — always dark, never light</div>
+        <div class="ps-note"><strong>Logo:</strong> The hand-drawn AI Spy artwork — white or gold version</div>
+        <div class="ps-note"><strong>Accent colour:</strong> #c9a84c Gold for any decorative elements</div>
+        <div class="ps-note"><strong>Text (if any):</strong> DM Sans 500, white or gold only</div>
+        <div class="ps-note"><strong>Padding:</strong> Minimum 10% on all sides — platforms crop corners</div>
+        <div class="ps-note"><strong>Format:</strong> JPG (not PNG) for final export to Spotify/Apple</div>
+      </div>
+    </div>
+    <div class="ps-specs">
+      <div class="ps-spec"><div class="ps-spec-label">Canvas size</div><div class="ps-spec-val">3000 × 3000px</div></div>
+      <div class="ps-spec"><div class="ps-spec-label">Min size</div><div class="ps-spec-val">1400 × 1400px</div></div>
+      <div class="ps-spec"><div class="ps-spec-label">Format</div><div class="ps-spec-val">JPG or PNG</div></div>
+      <div class="ps-spec"><div class="ps-spec-label">Max file size</div><div class="ps-spec-val">512 KB</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- INFOGRAPHIC CANVAS SIZES -->
+<div class="section">
+  <div class="section-title">Infographic canvas sizes</div>
+  <div class="section-sub">Use these exact dimensions in Canva when creating new infographics. Each format is optimised for its primary destination.</div>
+
+  <div class="hex-table">
+    <div class="hex-row header">
+      <div></div>
+      <div>Format</div>
+      <div>Canvas size</div>
+      <div>Primary use</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#0a1628;"></div>
+      <div class="hex-label">LinkedIn / Website gallery</div>
+      <div class="hex-code" style="font-size:10px;">1200 × 1200px</div>
+      <div class="hex-use">Square — works on LinkedIn feed and site gallery equally well</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#142240;"></div>
+      <div class="hex-label">LinkedIn tall (portrait)</div>
+      <div class="hex-code" style="font-size:10px;">1080 × 1350px</div>
+      <div class="hex-use">Takes up more feed space on LinkedIn — better engagement</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#c9a84c;"></div>
+      <div class="hex-label">Website full-width feature</div>
+      <div class="hex-code" style="font-size:10px;">1600 × 900px</div>
+      <div class="hex-use">Landscape — for featured infographics displayed wide on the site</div>
+    </div>
+    <div class="hex-row">
+      <div class="hex-dot" style="background:#6b6b67;"></div>
+      <div class="hex-label">PDF / print</div>
+      <div class="hex-code" style="font-size:10px;">2480 × 3508px</div>
+      <div class="hex-use">A4 at 300dpi — for downloadable PDF versions</div>
+    </div>
+  </div>
+</div>
+
+<!-- CANVA SETUP STEPS -->
+<div class="section">
+  <div class="section-title">Setting up in Canva — step by step</div>
+  <div class="section-sub">Do this once to create a brand kit in Canva. Every future infographic will automatically have the right colours and fonts available.</div>
+
+  <div class="steps-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Create a Brand Kit</div>
+        <div class="step-desc">In Canva, go to Brand Hub (left sidebar) → Create a Brand Kit → name it "Anurag Mohapatra." This stores your colours and fonts so they appear in every design automatically.</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Add brand colours</div>
+        <div class="step-desc">In the Brand Kit, click Add a colour → paste each hex code one at a time and give it a name. Add all eight colours from the Canva Hex Codes table above.</div>
+        <div class="step-code">Navy: #0a1628 &nbsp;·&nbsp; Gold: #c9a84c &nbsp;·&nbsp; Off-white: #f8f7f4 &nbsp;·&nbsp; Ink: #1a1a18</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Set brand fonts</div>
+        <div class="step-desc">In the Brand Kit, under Fonts → set Heading font to Playfair Display, Body font to DM Sans. Both are free and searchable directly in Canva's font picker.</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Upload the AI Spy logo</div>
+        <div class="step-desc">In Brand Kit → Logos → upload the AI Spy PNG (the hand-drawn logo). This makes it drag-and-droppable in any design. Upload both a white version and a gold version if available.</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">Create a master template</div>
+        <div class="step-desc">Design one infographic that you're happy with, then save it as a template in Canva. Future infographics start from this template — consistent layout, colours, and fonts guaranteed.</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <div class="step-title">Add your branding footer</div>
+        <div class="step-desc">Every infographic should have a small footer with your name and website. Lock this element in the template so it appears on every design automatically.</div>
+        <div class="step-code">Anurag Mohapatra &nbsp;·&nbsp; anuragmohapatra.com &nbsp;·&nbsp; DM Sans 400 / 9px / #6b6b67</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOS AND DONTS -->
+<div class="section">
+  <div class="section-title">Do&rsquo;s and don&rsquo;ts</div>
+  <div class="section-sub">Common mistakes to avoid when creating branded content.</div>
+  <div class="dodonts">
+    <div class="do-card">
+      <div class="dd-header do-header">DO &mdash; always</div>
+      <div class="dd-body">
+        <div class="dd-item do-item">Use Navy as the primary background on dark designs</div>
+        <div class="dd-item do-item">Use Gold only as an accent — one or two elements per design</div>
+        <div class="dd-item do-item">Use Playfair Display for the main headline only</div>
+        <div class="dd-item do-item">Keep stat numbers large — they are the centrepiece</div>
+        <div class="dd-item do-item">Add anuragmohapatra.com as a footer on every infographic</div>
+        <div class="dd-item do-item">Keep designs clean with generous white/navy space</div>
+        <div class="dd-item do-item">Export at 2× resolution for crisp display on retina screens</div>
+      </div>
+    </div>
+    <div class="dont-card">
+      <div class="dd-header dont-header">DON&rsquo;T &mdash; avoid</div>
+      <div class="dd-body">
+        <div class="dd-item dont-item">Don&rsquo;t use more than 2 colours in a single design</div>
+        <div class="dd-item dont-item">Don&rsquo;t use Gold as a background — it&rsquo;s an accent only</div>
+        <div class="dd-item dont-item">Don&rsquo;t mix Playfair and DM Sans at the same size</div>
+        <div class="dd-item dont-item">Don&rsquo;t use Arial, Roboto, or Canva default fonts</div>
+        <div class="dd-item dont-item">Don&rsquo;t add drop shadows or gradients</div>
+        <div class="dd-item dont-item">Don&rsquo;t use purple, teal, or other off-brand colours</div>
+        <div class="dd-item dont-item">Don&rsquo;t publish without the anuragmohapatra.com footer</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VOICE AND TONE -->
+<div class="section">
+  <div class="section-title">Voice and tone for infographics</div>
+  <div class="section-sub">What the writing inside your infographics should sound like.</div>
+  <div class="hex-table">
+    <div class="hex-row header">
+      <div></div>
+      <div>Principle</div>
+      <div style="grid-column:span 2;">Guidance</div>
+    </div>
+    <div class="hex-row" style="grid-template-columns:16px 1fr 2fr;">
+      <div class="hex-dot" style="background:#c9a84c;"></div>
+      <div class="hex-label">Data first</div>
+      <div class="hex-use" style="grid-column:span 1;">Lead with the number or finding. The headline IS the insight — not a description of what the infographic shows.</div>
+    </div>
+    <div class="hex-row" style="grid-template-columns:16px 1fr 2fr;">
+      <div class="hex-dot" style="background:#c9a84c;"></div>
+      <div class="hex-label">Practitioner voice</div>
+      <div class="hex-use">Write for a fraud professional, not a general audience. Use industry terminology correctly — SAR, APP fraud, mule account, EFTA, PSR.</div>
+    </div>
+    <div class="hex-row" style="grid-template-columns:16px 1fr 2fr;">
+      <div class="hex-dot" style="background:#c9a84c;"></div>
+      <div class="hex-label">One idea per infographic</div>
+      <div class="hex-use">Each infographic should make exactly one argument or reveal one key insight. Not a summary of everything you know on a topic.</div>
+    </div>
+    <div class="hex-row" style="grid-template-columns:16px 1fr 2fr;">
+      <div class="hex-dot" style="background:#c9a84c;"></div>
+      <div class="hex-label">Source everything</div>
+      <div class="hex-use">Every statistic needs a source in the footer. Builds credibility. Format: Source: NICE Actimize Fraud Insights 2025 — 9px, muted grey.</div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:2rem;padding:1.5rem;background:var(--off);border-radius:4px;border:0.5px solid var(--border);text-align:center;">
+  <div style="font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:4px;">Anurag Mohapatra Brand Style Guide v1.0</div>
+  <div style="font-size:11px;color:var(--muted);">anuragmohapatra.com &nbsp;&middot;&nbsp; March 2026 &nbsp;&middot;&nbsp; For design use only</div>
+</div>
+
+</body>
+</html>

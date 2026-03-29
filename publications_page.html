@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — Anurag Mohapatra</title>
+<meta name="description" content="Articles, research, and expert commentary on fraud prevention, AI, and financial crime by Anurag Mohapatra.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anuragmohapatra.com/publications_page.html">
+<meta property="og:title" content="Publications — Anurag Mohapatra">
+<meta property="og:description" content="Articles, research, and expert commentary on fraud prevention, AI, and financial crime by Anurag Mohapatra.">
+<meta property="og:image" content="https://anuragmohapatra.com/favicon-180.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Publications — Anurag Mohapatra">
+<meta name="twitter:description" content="Articles, research, and expert commentary on fraud prevention, AI, and financial crime by Anurag Mohapatra.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0a1628;--gold:#c9a84c;
+  --white:#ffffff;--off:#f8f7f4;--ink:#1a1a18;--muted:#6b6b67;--border:#e2e0d8;
+  --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;
+}
+body{font-family:var(--sans);background:var(--white);color:var(--ink);line-height:1.6;}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;border-bottom:0.5px solid var(--border);background:var(--white);position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink);}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:1.75rem;}
+.nav-links a{font-size:12px;color:var(--muted);text-decoration:none;font-weight:500;padding:4px 0;border-bottom:1.5px solid transparent;transition:all 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--gold);}
+.nav-cta{font-size:12px;font-weight:500;padding:7px 16px;border:0.5px solid var(--border);border-radius:3px;background:transparent;color:var(--ink);cursor:pointer;font-family:var(--sans);}
+
+.ticker{background:var(--navy);padding:9px 2.5rem;display:flex;gap:3rem;overflow:hidden;}
+.ticker-item{display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:11px;color:#8fa3c7;letter-spacing:0.06em;font-weight:500;}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* PAGE HEADER */
+.page-header{padding:3.5rem 2.5rem 0;max-width:1100px;margin:0 auto;}
+.page-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;}
+.page-title{font-family:var(--serif);font-size:42px;font-weight:600;color:var(--ink);line-height:1.1;margin-bottom:0.75rem;}
+.page-desc{font-size:14px;color:var(--muted);line-height:1.75;max-width:600px;margin-bottom:2rem;}
+
+/* STATS STRIP */
+.stats-strip{border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);max-width:100%;}
+.stat-col{padding:1.5rem 2.5rem;border-right:0.5px solid var(--border);text-align:center;}
+.stat-col:last-child{border-right:none;}
+.stat-n{font-family:var(--serif);font-size:30px;font-weight:600;color:var(--ink);line-height:1;}
+.stat-l{font-size:11px;color:var(--muted);margin-top:4px;}
+
+/* FILTER BAR */
+.filter-bar{padding:1rem 2.5rem;border-bottom:0.5px solid var(--border);display:flex;gap:8px;align-items:center;background:var(--white);position:sticky;top:57px;z-index:90;flex-wrap:wrap;}
+.filter-label{font-size:11px;color:var(--muted);margin-right:4px;}
+.filter-btn{font-size:11px;font-weight:500;padding:5px 14px;border:0.5px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
+.filter-btn.active,.filter-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy);}
+
+/* FEATURED ARTICLE */
+.featured-wrap{max-width:1100px;margin:2.5rem auto 0;padding:0 2.5rem;}
+.featured-card{background:var(--off);border:0.5px solid var(--border);border-left:3px solid var(--gold);border-radius:4px;padding:2rem;margin-bottom:2.5rem;display:grid;grid-template-columns:1fr 160px;gap:2rem;align-items:start;}
+.feat-badge{display:inline-block;font-size:9px;font-weight:500;padding:3px 8px;background:var(--gold);color:var(--navy);border-radius:2px;letter-spacing:0.06em;margin-bottom:10px;}
+.feat-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:8px;}
+.feat-meta{font-size:12px;color:var(--muted);margin-bottom:10px;}
+.feat-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;}
+.feat-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--navy);text-decoration:none;padding:8px 16px;border:0.5px solid var(--border);border-radius:3px;}
+.feat-link:hover{background:var(--navy);color:var(--white);border-color:var(--navy);}
+.feat-outlet{text-align:right;}
+.feat-outlet-name{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.feat-outlet-type{font-size:10px;color:var(--muted);}
+.feat-outlet-logo{width:100%;height:48px;background:var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);margin-top:8px;}
+
+/* MAIN PUBLICATION LIST */
+.pub-wrap{max-width:1100px;margin:0 auto;padding:0 2.5rem 4rem;}
+
+/* YEAR GROUP */
+.year-group{margin-bottom:2rem;}
+.year-header{display:flex;align-items:baseline;gap:1rem;padding:0.75rem 0;border-bottom:2px solid var(--border);margin-bottom:0;}
+.year-label{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);}
+.year-count{font-size:11px;color:var(--muted);}
+
+/* PUBLICATION ROW */
+.pub-row{display:grid;grid-template-columns:1fr auto;gap:1.5rem;padding:1.25rem 0;border-bottom:0.5px solid var(--border);align-items:start;cursor:pointer;}
+.pub-row:last-child{border-bottom:none;}
+.pub-row:hover .pub-title{color:var(--gold);}
+.pub-type-tag{display:inline-block;font-size:9px;font-weight:500;padding:2px 8px;border-radius:2px;margin-bottom:6px;letter-spacing:0.05em;}
+.tt-authored{background:#e1f5ee;color:#0f6e56;}
+.tt-quoted{background:#e6f1fb;color:#185fa5;}
+.tt-report{background:#faeeda;color:#854f0b;}
+.tt-finextra{background:var(--off);color:var(--muted);border:0.5px solid var(--border);}
+.pub-title{font-size:14px;font-weight:500;color:var(--ink);line-height:1.5;margin-bottom:5px;transition:color 0.15s;}
+.pub-outlet{font-size:12px;color:var(--muted);margin-bottom:4px;}
+.pub-snippet{font-size:12px;color:var(--muted);line-height:1.6;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.pub-right{text-align:right;min-width:100px;}
+.pub-date{font-size:11px;color:var(--muted);margin-bottom:6px;}
+.pub-arrow{font-size:18px;color:var(--border);}
+.pub-row:hover .pub-arrow{color:var(--gold);}
+
+/* FINEXTRA SECTION */
+.finextra-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;border-bottom:2px solid var(--border);margin-bottom:0;}
+.finextra-title{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);}
+.finextra-note{font-size:11px;color:var(--muted);font-style:italic;}
+
+/* CONTENT STRATEGY NOTE */
+.strategy-box{background:var(--navy);border-radius:4px;padding:2rem 2.5rem;margin:2rem 0;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+.sb-label{font-size:10px;color:var(--gold);font-weight:500;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;}
+.sb-title{font-family:var(--serif);font-size:18px;color:var(--white);font-weight:600;margin-bottom:4px;}
+.sb-desc{font-size:13px;color:#8fa3c7;line-height:1.6;}
+.sb-btn{font-size:12px;font-weight:500;padding:10px 20px;background:var(--gold);color:var(--navy);border:none;border-radius:3px;cursor:pointer;font-family:var(--sans);white-space:nowrap;}
+
+footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{font-family:var(--serif);font-size:14px;font-weight:600;}
+.footer-logo span{color:var(--gold);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-size:12px;color:var(--muted);text-decoration:none;}
+.footer-copy{font-size:11px;color:var(--muted);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.page-header{animation:fadeUp 0.5s ease both;}
+</style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="9beab7ec-4fca-460f-9ca6-0f071befbdb1"></script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Anurag <span>Mohapatra</span></div>
+  <div class="nav-links">
+    <a href="about_page.html">About</a>
+    <a href="podcast_page.html">AI Spy Podcast</a>
+    <a href="publications_page.html" class="active">Publications</a>
+    <a href="infographics_page.html">Infographics</a>
+    <a href="blog_page.html">Blog</a>
+    <a href="https://www.linkedin.com/in/anuragmohapatra/" target="_blank">Speaking</a>
+  </div>
+  <a href="https://www.linkedin.com/in/anuragmohapatra/" target="_blank"><button class="nav-cta">Follow on LinkedIn &rarr;</button></a>
+</nav>
+
+<div class="ticker">
+  <div class="ticker-item"><div class="ticker-dot"></div>Global Banking &amp; Finance Review &middot; Regulation Asia &middot; BankInfoSecurity &middot; Finextra</div>
+  <div class="ticker-item"><div class="ticker-dot"></div>Authored articles &middot; Industry reports &middot; Expert commentary</div>
+  <div class="ticker-item"><div class="ticker-dot"></div>AI &middot; Fraud Prevention &middot; Regulatory Policy &middot; Financial Crime</div>
+</div>
+
+<div class="page-header">
+  <div class="page-eyebrow">Research &amp; writing</div>
+  <div class="page-title">Publications</div>
+  <div class="page-desc">Authored articles, industry analysis, and expert commentary published across major financial crime, regulatory, and banking outlets. All pieces reflect independent views on fraud prevention, AI, and regulatory policy.</div>
+</div>
+
+<div class="stats-strip">
+  <div class="stat-col"><div class="stat-n">8+</div><div class="stat-l">Authored articles</div></div>
+  <div class="stat-col"><div class="stat-n">4</div><div class="stat-l">Outlets &amp; publications</div></div>
+  <div class="stat-col"><div class="stat-n">2023–26</div><div class="stat-l">Publishing span</div></div>
+  <div class="stat-col"><div class="stat-n">1</div><div class="stat-l">Magazine cover feature</div></div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <span class="filter-label">Filter by</span>
+  <button class="filter-btn active" onclick="filterPubs('all',this)">All</button>
+  <button class="filter-btn" onclick="filterPubs('authored',this)">Authored</button>
+  <button class="filter-btn" onclick="filterPubs('quoted',this)">Quoted / Expert commentary</button>
+  <button class="filter-btn" onclick="filterPubs('finextra',this)">Finextra</button>
+  <button class="filter-btn" onclick="filterPubs('regulatory',this)">Regulatory</button>
+  <button class="filter-btn" onclick="filterPubs('ai',this)">AI &amp; Technology</button>
+  <button class="filter-btn" onclick="filterPubs('scams',this)">Scams &amp; Fraud</button>
+</div>
+
+<!-- FEATURED -->
+<div class="featured-wrap">
+  <div class="featured-card">
+    <div>
+      <span class="feat-badge">Most Recent &middot; 2026</span>
+      <div class="feat-title">What the SCAM Act and New Mexico v. Meta Mean for the Fight Against Online Fraud</div>
+      <div class="feat-meta">March 2026 &middot; Global Banking &amp; Finance Review &middot; Authored by Anurag Mohapatra</div>
+      <div class="feat-desc">An analysis of two converging institutions &mdash; one legislative, one judicial &mdash; arriving simultaneously at the conclusion that platforms are not passive intermediaries. Covers the SCAM Act&rsquo;s Section 230 carve-out, the New Mexico v. Meta trial, and what both mean for fraud prevention practitioners.</div>
+      <a class="feat-link" href="https://www.globalbankingandfinance.com/what-the-scam-act-and-new-mexico-v-meta-mean-for-the-fight-against-online-fraud/" target="_blank">Read on Global Banking &amp; Finance &rarr;</a>
+    </div>
+    <div class="feat-outlet">
+      <div class="feat-outlet-name">Global Banking &amp; Finance Review</div>
+      <div class="feat-outlet-type">Cover publication &middot; Author</div>
+    </div>
+  </div>
+</div>
+
+<!-- ALL PUBLICATIONS -->
+<div class="pub-wrap">
+
+  <!-- 2026 -->
+  <div class="year-group" data-year="2026">
+    <div class="year-header">
+      <span class="year-label">2026</span>
+      <span class="year-count">2 publications</span>
+    </div>
+
+    <div class="pub-row" data-tags="authored regulatory scams" onclick="window.open('https://www.globalbankingandfinance.com/what-the-scam-act-and-new-mexico-v-meta-mean-for-the-fight-against-online-fraud/','_blank')">
+      <div>
+        <span class="pub-type-tag tt-authored">Authored</span>
+        <div class="pub-title">What the SCAM Act and New Mexico v. Meta Mean for the Fight Against Online Fraud</div>
+        <div class="pub-outlet">Global Banking &amp; Finance Review</div>
+        <div class="pub-snippet">The SCAM Act&rsquo;s Section 230 carve-out and the New Mexico v. Meta trial represent a convergence: two institutions arriving simultaneously at platform accountability for fraud.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">March 2026</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="pub-row" data-tags="authored finextra scams" onclick="window.open('https://www.finextra.com/bloggers/146061','_blank')">
+      <div>
+        <span class="pub-type-tag tt-finextra">Finextra</span>
+        <div class="pub-title">Reporting from the 1LoD FinCrime Summit, Manhattan</div>
+        <div class="pub-outlet">Finextra Community</div>
+        <div class="pub-snippet">Event report from the 1LoD FinCrime Summit at Chelsea Piers &mdash; boardroom debates, panel discussions, and key takeaways for financial crime practitioners.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">March 2026</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2025 -->
+  <div class="year-group" data-year="2025">
+    <div class="year-header">
+      <span class="year-label">2025</span>
+      <span class="year-count">5 publications</span>
+    </div>
+
+    <div class="pub-row" data-tags="authored ai scams" onclick="window.open('https://www.regulationasia.com/scam-liability-in-asia-a-spectrum-of-policies-one-common-fight','_blank')">
+      <div>
+        <span class="pub-type-tag tt-authored">Authored</span>
+        <div class="pub-title">Scam Liability in Asia: A Spectrum of Policies, One Common Fight</div>
+        <div class="pub-outlet">Regulation Asia</div>
+        <div class="pub-snippet">Asia as a diverse testbed for regulatory experimentation &mdash; from Singapore&rsquo;s Shared Responsibility Framework to Thailand&rsquo;s mandatory reimbursement and Myanmar&rsquo;s fragmented enforcement.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">2025</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="pub-row" data-tags="authored scams regulatory" onclick="window.open('https://www.globalbankingandfinance.com/romance-scams-a-growing-threat-and-how-to-fight-them','_blank')">
+      <div>
+        <span class="pub-type-tag tt-authored">Authored</span>
+        <div class="pub-title">Romance Scams: A Growing Threat and How to Fight Them</div>
+        <div class="pub-outlet">Global Banking &amp; Finance Review</div>
+        <div class="pub-snippet">A 17% increase in financial losses, 70% of victims staying silent, and Section 230 shielding the platforms where scams originate &mdash; a call for a united industry response.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">Feb 2025</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="pub-row" data-tags="quoted ai scams" onclick="window.open('https://www.bankinfosecurity.com/moving-from-anomalies-to-connections-in-fraud-defense-a-30833','_blank')">
+      <div>
+        <span class="pub-type-tag tt-quoted">Quoted expert</span>
+        <div class="pub-title">Moving from Anomalies to Connections in Fraud Defense</div>
+        <div class="pub-outlet">BankInfoSecurity / ISMG</div>
+        <div class="pub-snippet">On network intelligence changing the core analytic focus from anomalies to connections &mdash; and why fewer than a third of Tier 1 institutions have integrated it into live decisioning.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">2025</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="pub-row" data-tags="authored scams regulatory" onclick="window.open('https://www.globalbankingandfinance.com/scams-still-prevail-as-fis-guard-evolving-payments-channels-','_blank')">
+      <div>
+        <span class="pub-type-tag tt-authored">Authored</span>
+        <div class="pub-title">Scams Still Prevail as FIs Guard Evolving Payments Channels</div>
+        <div class="pub-outlet">Global Banking &amp; Finance Review</div>
+        <div class="pub-snippet">Analysis of the 2025 NICE Actimize Fraud Insights Report &mdash; scams remain the dominant fraud method, with channel-specific strategies and onboarding controls as the frontline response.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">May 2025</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="pub-row" data-tags="quoted ai scams" onclick="window.open('https://www.bankinfosecurity.com/ai-still-fails-to-catch-authorized-scams-a-29946','_blank')">
+      <div>
+        <span class="pub-type-tag tt-quoted">Quoted expert</span>
+        <div class="pub-title">Why AI Still Fails to Catch &lsquo;Authorized&rsquo; Scams</div>
+        <div class="pub-outlet">BankInfoSecurity / ISMG</div>
+        <div class="pub-snippet">&ldquo;89% of confirmed fraud flows to beneficiaries that the sending bank has never seen before.&rdquo; On federated learning, data isolation, and the real limits of current AI fraud detection.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">2025</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2024 -->
+  <div class="year-group" data-year="2024">
+    <div class="year-header">
+      <span class="year-label">2024</span>
+      <span class="year-count">3 publications</span>
+    </div>
+
+    <div class="pub-row" data-tags="authored regulatory scams" onclick="window.open('https://www.globalbankingandfinance.com/how-the-proposed-u-s-protecting-consumers-from-payment-scams-act-could-impact-financial-institutions-fraud-prevention-efforts/','_blank')">
+      <div>
+        <span class="pub-type-tag tt-authored">Authored</span>
+        <div class="pub-title">How the Proposed &ldquo;Protecting Consumers from Payment Scams Act&rdquo; Could Impact Financial Institutions</div>
+        <div class="pub-outlet">Global Banking &amp; Finance Review</div>
+        <div class="pub-snippet">The 2024 EFTA amendment proposal &mdash; expanded definitions, shared liability, enhanced error resolution, and what it means operationally for fraud teams before the bill even passes.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">Sep 2024</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="pub-row" data-tags="authored ai" onclick="window.open('https://www.globalbankingandfinance.com/the-end-of-voice-trust-how-ai-deepfakes-are-forcing-banks-to-rethink-authentication','_blank')">
+      <div>
+        <span class="pub-type-tag tt-authored">Authored</span>
+        <div class="pub-title">The End of Voice Trust: How AI Deepfakes Are Forcing Banks to Rethink Authentication</div>
+        <div class="pub-outlet">Global Banking &amp; Finance Review</div>
+        <div class="pub-snippet">The era of single-factor voice authentication is ending. An examination of why banks recognised the deepfake vulnerability before it made headlines &mdash; and what layered authentication must look like next.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">Aug 2025</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="pub-row" data-tags="authored report scams" onclick="window.open('https://www.niceactimize.com/blog/fraud-prevention-check-fraud-in-the-modern-payments-landscape','_blank')">
+      <div>
+        <span class="pub-type-tag tt-report">Industry report</span>
+        <div class="pub-title">Check Fraud in the Modern Payments Landscape</div>
+        <div class="pub-outlet">NICE Actimize Blog &middot; Co-authored</div>
+        <div class="pub-snippet">Between 2019 and 2022, check fraud surged 140% with 680,000 SARs filed. A data-led analysis of the anatomy of check fraud, mule accounts, and what institutions must do now.</div>
+      </div>
+      <div class="pub-right">
+        <div class="pub-date">2024</div>
+        <div class="pub-arrow">&rarr;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINEXTRA SECTION -->
+  <div class="year-group" data-tags-group="finextra">
+    <div class="finextra-header">
+      <span class="finextra-title">As published on Finextra</span>
+      <span class="finextra-note">Canonical articles live on Finextra &mdash; links open there</span>
+    </div>
+
+    <div class="pub-row" data-tags="finextra regulatory scams" onclick="window.open('https://www.finextra.com/bloggers/146061','_blank')">
+      <div>
+        <span class="pub-type-tag tt-finextra">Finextra</span>
+        <div class="pub-title">1LoD FinCrime Summit Report: Chelsea Piers, Manhattan</div>
+        <div class="pub-outlet">Finextra Community &middot; March 2026</div>
+      </div>
+      <div class="pub-right"><div class="pub-date">Mar 2026</div><div class="pub-arrow">&rarr;</div></div>
+    </div>
+
+    <div class="pub-row" data-tags="finextra regulatory scams" onclick="window.open('https://www.finextra.com/bloggers/146061','_blank')">
+      <div>
+        <span class="pub-type-tag tt-finextra">Finextra</span>
+        <div class="pub-title">Fraud Predictions 2024: Check Fraud, Scams, and Money Mule Activity</div>
+        <div class="pub-outlet">Finextra Community &middot; NICE Actimize</div>
+      </div>
+      <div class="pub-right"><div class="pub-date">Late 2023</div><div class="pub-arrow">&rarr;</div></div>
+    </div>
+
+    <div class="pub-row" data-tags="finextra ai" onclick="window.open('https://www.niceactimize.com/compliance/blog-surveillance-2021-what-firms-are-doing-today-what-is-on-the-horizon.html','_blank')">
+      <div>
+        <span class="pub-type-tag tt-finextra">NICE Actimize</span>
+        <div class="pub-title">Surveillance 2021: What Firms Are Doing Today, What&rsquo;s on the Horizon</div>
+        <div class="pub-outlet">NICE Actimize Compliance Blog</div>
+      </div>
+      <div class="pub-right"><div class="pub-date">2021</div><div class="pub-arrow">&rarr;</div></div>
+    </div>
+  </div>
+
+  <!-- BLOG STRATEGY CTA -->
+  <div class="strategy-box">
+    <div>
+      <div class="sb-label">Original content on this site</div>
+      <div class="sb-title">Follow for the latest analysis</div>
+      <div class="sb-desc">New articles, event reports, and commentary are posted on LinkedIn as they publish. Follow to stay current on AI, fraud prevention, and financial crime regulation.</div>
+    </div>
+    <a href="https://www.linkedin.com/in/anuragmohapatra/" target="_blank"><button class="sb-btn">Follow on LinkedIn &rarr;</button></a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">Anurag <span>Mohapatra</span></div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/anuragmohapatra/" target="_blank">LinkedIn</a>
+    <a href="podcast_page.html">AI Spy Podcast</a>
+    <a href="#">Finextra</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 &middot; anuragmohapatra.com</div>
+</footer>
+
+<script>
+function filterPubs(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const rows = document.querySelectorAll('.pub-row');
+  rows.forEach(row => {
+    const tags = (row.dataset.tags || '').split(' ');
+    if (tag === 'all') {
+      row.style.display = '';
+    } else if (tag === 'finextra') {
+      row.style.display = tags.includes('finextra') ? '' : 'none';
+    } else if (tag === 'authored') {
+      row.style.display = tags.includes('authored') ? '' : 'none';
+    } else if (tag === 'quoted') {
+      row.style.display = tags.includes('quoted') ? '' : 'none';
+    } else if (tag === 'regulatory') {
+      row.style.display = tags.includes('regulatory') ? '' : 'none';
+    } else if (tag === 'ai') {
+      row.style.display = tags.includes('ai') ? '' : 'none';
+    } else if (tag === 'scams') {
+      row.style.display = tags.includes('scams') ? '' : 'none';
+    }
+  });
+
+  // show/hide year headers based on whether any rows in the group are visible
+  document.querySelectorAll('.year-group').forEach(group => {
+    const visibleRows = group.querySelectorAll('.pub-row:not([style*="none"])');
+    group.style.display = visibleRows.length > 0 ? '' : 'none';
+  });
+
+  // hide featured card when not showing authored or all
+  const featured = document.querySelector('.featured-wrap');
+  if (featured) {
+    featured.style.display = (tag === 'all' || tag === 'authored' || tag === 'scams' || tag === 'regulatory') ? '' : 'none';
+  }
+}
+</script>
+
+</body>
+</html>

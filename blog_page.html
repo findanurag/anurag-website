@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Anurag Mohapatra</title>
+<meta name="description" content="Insights and analysis on AI, fraud strategy, and financial crime from Anurag Mohapatra.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anuragmohapatra.com/blog_page.html">
+<meta property="og:title" content="Blog — Anurag Mohapatra">
+<meta property="og:description" content="Insights and analysis on AI, fraud strategy, and financial crime from Anurag Mohapatra.">
+<meta property="og:image" content="https://anuragmohapatra.com/favicon-180.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Blog — Anurag Mohapatra">
+<meta name="twitter:description" content="Insights and analysis on AI, fraud strategy, and financial crime from Anurag Mohapatra.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0a1628;--gold:#c9a84c;
+  --white:#ffffff;--off:#f8f7f4;--ink:#1a1a18;--muted:#6b6b67;--border:#e2e0d8;
+  --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;
+}
+body{font-family:var(--sans);background:var(--white);color:var(--ink);line-height:1.6;}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;border-bottom:0.5px solid var(--border);background:var(--white);position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink);}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:1.75rem;}
+.nav-links a{font-size:12px;color:var(--muted);text-decoration:none;font-weight:500;padding:4px 0;border-bottom:1.5px solid transparent;transition:all 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--gold);}
+.nav-cta{font-size:12px;font-weight:500;padding:7px 16px;border:0.5px solid var(--border);border-radius:3px;background:transparent;color:var(--ink);cursor:pointer;font-family:var(--sans);}
+
+.ticker{background:var(--navy);padding:9px 2.5rem;display:flex;gap:3rem;overflow:hidden;}
+.ticker-item{display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:11px;color:#8fa3c7;letter-spacing:0.06em;font-weight:500;}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+.page-header{padding:3.5rem 2.5rem 2.5rem;max-width:1100px;margin:0 auto;border-bottom:0.5px solid var(--border);}
+.page-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;}
+.page-title{font-family:var(--serif);font-size:42px;font-weight:600;color:var(--ink);line-height:1.1;margin-bottom:0.75rem;}
+.page-desc{font-size:14px;color:var(--muted);line-height:1.75;max-width:580px;}
+
+.filter-bar{padding:1rem 2.5rem;border-bottom:0.5px solid var(--border);display:flex;gap:8px;align-items:center;background:var(--white);position:sticky;top:57px;z-index:90;flex-wrap:wrap;}
+.filter-label{font-size:11px;color:var(--muted);margin-right:4px;}
+.filter-btn{font-size:11px;font-weight:500;padding:5px 14px;border:0.5px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
+.filter-btn.active,.filter-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy);}
+.post-count{margin-left:auto;font-size:11px;color:var(--muted);}
+
+.content-wrap{max-width:1100px;margin:0 auto;padding:2.5rem 2.5rem 4rem;}
+
+/* FEATURED */
+.featured-post{border-left:3px solid var(--gold);background:var(--off);border-radius:0 4px 4px 0;padding:2rem;margin-bottom:2.5rem;display:grid;grid-template-columns:1fr 180px;gap:2rem;align-items:start;cursor:pointer;transition:background 0.15s;text-decoration:none;display:grid;}
+.featured-post:hover{background:#f0ede8;}
+.fp-badge{display:inline-block;font-size:9px;font-weight:500;padding:3px 8px;background:var(--gold);color:var(--navy);border-radius:2px;letter-spacing:0.06em;margin-bottom:10px;}
+.fp-title{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:8px;}
+.fp-meta{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.fp-excerpt{font-size:13px;color:var(--muted);line-height:1.75;}
+.fp-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;}
+.fp-source{font-size:10px;color:var(--muted);text-align:right;line-height:1.5;}
+.fp-arrow{font-size:22px;color:var(--border);margin-top:auto;}
+.featured-post:hover .fp-arrow{color:var(--gold);}
+
+.badge{display:inline-block;font-size:9px;font-weight:500;padding:2px 8px;border-radius:2px;letter-spacing:0.05em;}
+.b-event{background:#e1f5ee;color:#0f6e56;}
+.b-longform{background:#faeeda;color:#854f0b;}
+.b-report{background:#e6f1fb;color:#185fa5;}
+.b-nice{background:var(--off);color:var(--muted);border:0.5px solid var(--border);}
+.b-linkedin{background:#e8f0fa;color:#0a66c2;}
+
+.section-divider{display:flex;align-items:center;gap:1rem;margin:2rem 0 1.5rem;}
+.sd-label{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+.sd-line{flex:1;height:0.5px;background:var(--border);}
+
+/* POST GRID */
+.post-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:2rem;}
+
+.post-card{border:0.5px solid var(--border);border-radius:4px;background:var(--white);padding:1.5rem;cursor:pointer;transition:background 0.15s;display:flex;flex-direction:column;text-decoration:none;}
+.post-card:hover{background:var(--off);}
+.post-card.nice-card{border-top:2px solid var(--border);}
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.pc-date{font-size:10px;color:var(--muted);}
+.pc-title{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:8px;}
+.post-card:hover .pc-title{color:var(--gold);}
+.pc-excerpt{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:12px;flex:1;}
+.pc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;border-top:0.5px solid var(--border);}
+.pc-outlet{font-size:10px;color:var(--muted);}
+.pc-arrow{font-size:14px;color:var(--border);}
+.post-card:hover .pc-arrow{color:var(--gold);}
+
+/* NICE ATTRIBUTION */
+.nice-attr{display:flex;align-items:center;gap:6px;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border);}
+.nice-attr-label{font-size:10px;color:var(--muted);}
+.nice-attr-name{font-size:10px;font-weight:500;color:var(--ink);}
+.nice-attr-link{font-size:10px;color:#185fa5;text-decoration:none;margin-left:auto;}
+.nice-attr-link:hover{text-decoration:underline;}
+
+/* LINKEDIN CTA */
+.linkedin-cta{background:var(--navy);border-radius:4px;padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;margin-top:2.5rem;}
+.lc-left .lc-title{font-family:var(--serif);font-size:18px;color:var(--white);font-weight:600;margin-bottom:4px;}
+.lc-left .lc-desc{font-size:13px;color:#8fa3c7;}
+.lc-btn{font-size:12px;font-weight:500;padding:10px 20px;background:var(--gold);color:var(--navy);border:none;border-radius:3px;cursor:pointer;font-family:var(--sans);white-space:nowrap;text-decoration:none;display:inline-block;}
+
+footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{font-family:var(--serif);font-size:14px;font-weight:600;}
+.footer-logo span{color:var(--gold);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-size:12px;color:var(--muted);text-decoration:none;}
+.footer-copy{font-size:11px;color:var(--muted);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.page-header{animation:fadeUp 0.5s ease both;}
+.featured-post{animation:fadeUp 0.5s 0.1s ease both;}
+</style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="9beab7ec-4fca-460f-9ca6-0f071befbdb1"></script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Anurag <span>Mohapatra</span></div>
+  <div class="nav-links">
+    <a href="about_page.html">About</a>
+    <a href="podcast_page.html">AI Spy Podcast</a>
+    <a href="publications_page.html">Publications</a>
+    <a href="infographics_page.html">Infographics</a>
+    <a href="blog_page.html" class="active">Blog</a>
+    <a href="https://www.linkedin.com/in/anuragmohapatra/" target="_blank">Speaking</a>
+  </div>
+  <a href="https://www.linkedin.com/in/anuragmohapatra/" target="_blank"><button class="nav-cta">Follow on LinkedIn &rarr;</button></a>
+</nav>
+
+<div class="ticker">
+  <div class="ticker-item"><div class="ticker-dot"></div>Original writing &middot; published here first</div>
+  <div class="ticker-item"><div class="ticker-dot"></div>Event reports &middot; Field notes &middot; Analysis</div>
+  <div class="ticker-item"><div class="ticker-dot"></div>AI &middot; Fraud Prevention &middot; Scams &middot; Regulatory Trends</div>
+  <div class="ticker-item"><div class="ticker-dot"></div>Syndicated to Finextra after publication</div>
+</div>
+
+<div class="page-header">
+  <div class="page-eyebrow">Intelligence Brief</div>
+  <div class="page-title">Blog</div>
+  <div class="page-desc">Practitioner-level commentary on AI, fraud, scams, and regulatory trends &mdash; written from inside the industry. Original posts appear here first, then syndicate to Finextra and other outlets.</div>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active" onclick="filterPosts('all',this)">All</button>
+  <button class="filter-btn" onclick="filterPosts('event',this)">Event reports</button>
+  <button class="filter-btn" onclick="filterPosts('longform',this)">Analysis</button>
+  <button class="filter-btn" onclick="filterPosts('nice',this)">As published on NICE Actimize</button>
+  <span class="post-count" id="post-count">5 posts</span>
+</div>
+
+<div class="content-wrap">
+
+  <!-- FEATURED: UN Global Fraud Summit — real LinkedIn link -->
+  <a class="featured-post" data-tags="event linkedin" href="https://www.linkedin.com/pulse/field-notes-from-un-global-fraud-summit-day-1-anurag-mohapatra-rksbe" target="_blank">
+    <div>
+      <span class="fp-badge">Latest &middot; Event Report</span>
+      <div class="fp-title">Field Notes from the UN Global Fraud Summit &mdash; Day 1</div>
+      <div class="fp-meta">
+        <span>March 16, 2026</span>
+        <span>&middot;</span>
+        <span>Vienna, Austria &middot; UNODC &amp; INTERPOL</span>
+        <span class="badge b-event">Event Report</span>
+        <span class="badge b-linkedin">LinkedIn Article</span>
+      </div>
+      <div class="fp-excerpt">Field notes from Day 1 of the UN Global Fraud Summit at the Vienna International Centre &mdash; a ministerial-level convening by UNODC and INTERPOL bringing together governments, law enforcement, and the private sector to strengthen coordinated action against fraud as a transnational threat.</div>
+    </div>
+    <div class="fp-right">
+      <div class="fp-source">Published on<br>LinkedIn Pulse<br><br>Opens LinkedIn &rarr;</div>
+      <div class="fp-arrow">&rarr;</div>
+    </div>
+  </a>
+
+  <!-- SECTION: ORIGINAL WRITING -->
+  <div class="section-divider" id="div-original">
+    <span class="sd-label">Original writing</span>
+    <div class="sd-line"></div>
+  </div>
+
+  <div class="post-grid" id="grid-original">
+
+    <!-- 1LoD FinCrime Summit -->
+    <a class="post-card" data-tags="event" href="https://www.finextra.com/bloggers/146061" target="_blank">
+      <div class="pc-top">
+        <span class="badge b-event">Event Report</span>
+        <span class="pc-date">Mar 12, 2026</span>
+      </div>
+      <div class="pc-title">Inside the 1LoD FinCrime Summit: What the Boardroom Debates Revealed</div>
+      <div class="pc-excerpt">Natural light poured through the rooms at Chelsea Piers. The format shifted from boardroom debates to panel discussions &mdash; and the conversations were sharper than most conference panels. Key takeaways from one of the most candid FinCrime forums of the year.</div>
+      <div class="pc-footer">
+        <span class="pc-outlet">Also on Finextra</span>
+        <span class="pc-arrow">&rarr;</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- SECTION: AS PUBLISHED ON NICE ACTIMIZE -->
+  <div class="section-divider" id="div-nice">
+    <span class="sd-label">As published on NICE Actimize</span>
+    <div class="sd-line"></div>
+  </div>
+
+  <div class="post-grid" id="grid-nice">
+
+    <!-- Check Fraud -->
+    <a class="post-card nice-card" data-tags="nice longform" href="https://www.niceactimize.com/blog/fraud-prevention-check-fraud-in-the-modern-payments-landscape" target="_blank">
+      <div class="pc-top">
+        <span class="badge b-report">Analysis</span>
+        <span class="pc-date">2024</span>
+      </div>
+      <div class="pc-title">Check Fraud in the Modern Payments Landscape</div>
+      <div class="pc-excerpt">Between 2019 and 2022, check fraud surged 140% with 680,000 SARs filed. A data-led look at the anatomy of modern check fraud, mule accounts, counterfeit schemes, and what institutions must do now.</div>
+      <div class="nice-attr">
+        <span class="nice-attr-label">As published on</span>
+        <span class="nice-attr-name">&nbsp;NICE Actimize</span>
+        <a class="nice-attr-link" href="https://www.niceactimize.com/blog/fraud-prevention-check-fraud-in-the-modern-payments-landscape" target="_blank">Read on NICE Actimize &rarr;</a>
+      </div>
+    </a>
+
+    <!-- Fraud Predictions 2024 -->
+    <a class="post-card nice-card" data-tags="nice longform" href="https://www.niceactimize.com/blog/fraud-predictions-2024/" target="_blank">
+      <div class="pc-top">
+        <span class="badge b-report">Analysis</span>
+        <span class="pc-date">Late 2023</span>
+      </div>
+      <div class="pc-title">Fraud Predictions 2024: Check Fraud, Scams, and Money Mule Activity</div>
+      <div class="pc-excerpt">Check fraud numbers in 2023 showed no signs of dipping &mdash; SARs on track to beat 2022. A forward look at the three fraud themes set to define 2024: check fraud persistence, scam growth, and mule activity.</div>
+      <div class="nice-attr">
+        <span class="nice-attr-label">As published on</span>
+        <span class="nice-attr-name">&nbsp;NICE Actimize</span>
+        <a class="nice-attr-link" href="https://www.niceactimize.com/blog/fraud-predictions-2024/" target="_blank">Read on NICE Actimize &rarr;</a>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- LINKEDIN FOLLOW CTA -->
+  <div class="linkedin-cta">
+    <div class="lc-left">
+      <div class="lc-title">Follow for new posts</div>
+      <div class="lc-desc">New articles and event reports are posted on LinkedIn as they publish.</div>
+    </div>
+    <a class="lc-btn" href="https://www.linkedin.com/in/anuragmohapatra/" target="_blank">Follow on LinkedIn &rarr;</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">Anurag <span>Mohapatra</span></div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/anuragmohapatra/" target="_blank">LinkedIn</a>
+    <a href="podcast_page.html">AI Spy Podcast</a>
+    <a href="#">Finextra</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 &middot; anuragmohapatra.com</div>
+</footer>
+
+<script>
+function filterPosts(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const items = document.querySelectorAll('[data-tags]');
+  let count = 0;
+  items.forEach(item => {
+    const tags = (item.dataset.tags || '').split(' ');
+    const show = tag === 'all'
+      || (tag === 'event' && tags.includes('event'))
+      || (tag === 'longform' && tags.includes('longform'))
+      || (tag === 'nice' && tags.includes('nice'));
+    item.style.display = show ? '' : 'none';
+    if (show) count++;
+  });
+
+  // show/hide section dividers
+  const origVisible = [...document.querySelectorAll('#grid-original [data-tags]')].some(c => c.style.display !== 'none');
+  const niceVisible = [...document.querySelectorAll('#grid-nice [data-tags]')].some(c => c.style.display !== 'none');
+  document.getElementById('div-original').style.display = origVisible ? '' : 'none';
+  document.getElementById('div-nice').style.display = niceVisible ? '' : 'none';
+
+  document.getElementById('post-count').textContent = count + ' post' + (count !== 1 ? 's' : '');
+}
+</script>
+
+</body>
+</html>

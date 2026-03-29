@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fraud Networks Built Infrastructure — Anurag Mohapatra</title>
+<meta name="description" content="Visual infographic exploring how fraud networks build and exploit financial infrastructure.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anuragmohapatra.com/infographic_fraud_infrastructure.html">
+<meta property="og:title" content="Fraud Networks Built Infrastructure — Anurag Mohapatra">
+<meta property="og:description" content="Visual infographic exploring how fraud networks build and exploit financial infrastructure.">
+<meta property="og:image" content="https://anuragmohapatra.com/favicon-180.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fraud Networks Built Infrastructure — Anurag Mohapatra">
+<meta name="twitter:description" content="Visual infographic exploring how fraud networks build and exploit financial infrastructure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400;1,600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* FIXED PORTRAIT CANVAS — 1080x1350 scaled to fit screen */
+  .canvas {
+    background: #0a1628;
+    width: 1080px;
+    min-height: 1350px;
+    padding: 64px 72px 48px;
+    position: relative;
+    /* Scale down on smaller screens while keeping portrait ratio */
+    transform-origin: top center;
+  }
+
+  @media (max-width: 1200px) {
+    body { padding: 0; align-items: flex-start; }
+    .canvas { transform: scale(0.75); transform-origin: top center; margin-bottom: -337px; }
+  }
+  @media (max-width: 900px) {
+    .canvas { transform: scale(0.55); margin-bottom: -607px; }
+  }
+  @media (max-width: 650px) {
+    .canvas { transform: scale(0.38); margin-bottom: -837px; }
+  }
+
+  /* EYEBROW */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 14px;
+  }
+
+  /* HEADLINE */
+  .headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .headline em { color: #c9a84c; font-style: italic; }
+
+  /* SUBHEAD */
+  .subhead {
+    font-size: 15px;
+    color: #8fa3c7;
+    line-height: 1.7;
+    padding-bottom: 28px;
+    border-bottom: 0.5px solid rgba(201,168,76,0.25);
+    margin-bottom: 28px;
+  }
+
+  /* SECTION LABEL */
+  .sec-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sec-label::after { content: ''; flex: 1; height: 0.5px; background: rgba(201,168,76,0.2); }
+
+  /* HERO STAT */
+  .hero-stat-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+  .hero-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 600;
+    color: #c9a84c;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .hero-label {
+    font-size: 15px;
+    color: #8fa3c7;
+    line-height: 1.6;
+  }
+  .hero-label strong { color: #fff; font-weight: 500; display: block; font-size: 16px; margin-bottom: 4px; }
+
+  /* TRIO */
+  .trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .trio-card {
+    background: #142240;
+    border-radius: 4px;
+    padding: 16px;
+    border-top: 2px solid #c9a84c;
+  }
+  .trio-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: #c9a84c;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .trio-desc { font-size: 12px; color: #8fa3c7; line-height: 1.5; }
+
+  /* BODY COPY */
+  .body-copy {
+    font-size: 13px;
+    color: #8fa3c7;
+    line-height: 1.75;
+    padding: 14px 18px;
+    background: #0f1e35;
+    border-radius: 4px;
+    border-left: 2px solid rgba(201,168,76,0.4);
+    margin-bottom: 24px;
+  }
+  .body-copy strong { color: #e8d4a0; font-weight: 500; }
+
+  /* SECTION DIVIDER */
+  .section-gap { margin-bottom: 24px; }
+
+  /* PARADOX CALLOUT */
+  .paradox-callout {
+    background: #142240;
+    border-radius: 4px;
+    padding: 18px 22px;
+    border-left: 3px solid #c9a84c;
+    margin-bottom: 12px;
+  }
+  .pc-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.35;
+    font-style: italic;
+  }
+
+  /* CONTRAST GRID */
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .contrast-col { padding: 18px 20px; }
+  .contrast-col.left  { background: #142240; }
+  .contrast-col.right { background: #0d2035; border-left: 2px solid #c9a84c; }
+  .cc-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .cc-label-left  { color: #5a6a85; }
+  .cc-label-right { color: #c9a84c; }
+  .cc-title { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 10px; line-height: 1.3; }
+  .contrast-item {
+    font-size: 12px;
+    color: #8fa3c7;
+    padding: 6px 0;
+    border-bottom: 0.5px solid rgba(255,255,255,0.06);
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .contrast-item:last-child { border-bottom: none; }
+  .ci-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .ci-dot.left  { background: #5a6a85; }
+  .ci-dot.right { background: #c9a84c; }
+
+  /* CLOSING */
+  .closing {
+    background: #c9a84c;
+    border-radius: 4px;
+    padding: 22px 24px;
+    margin-bottom: 28px;
+  }
+  .closing-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #0a1628;
+    line-height: 1.45;
+  }
+  .closing-text em { font-style: italic; }
+
+  /* FOOTER */
+  .ig-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 16px;
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer-brand { font-size: 11px; color: #c9a84c; font-weight: 500; letter-spacing: 0.06em; }
+  .footer-source { font-size: 10px; color: #3a4a62; line-height: 1.5; text-align: right; max-width: 400px; }
+
+  /* PRINT / EXPORT HINT */
+  @media print {
+    body { background: none; padding: 0; }
+    .canvas { transform: none !important; margin: 0 !important; box-shadow: none; }
+    .print-hint { display: none; }
+  }
+  .print-hint {
+    margin-top: 16px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: #8fa3c7;
+    line-height: 1.6;
+  }
+</style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="9beab7ec-4fca-460f-9ca6-0f071befbdb1"></script>
+</head>
+<body>
+
+<div>
+  <div class="canvas">
+
+    <div class="eyebrow">Financial crime analysis &middot; 2025</div>
+
+    <div class="headline">While We Watched Scams,<br><em>Fraud Networks Built Infrastructure.</em></div>
+
+    <div class="subhead">The real growth in financial fraud isn&rsquo;t coming from scams. It&rsquo;s coming from the industrial machinery behind them.</div>
+
+    <!-- SECTION 1: THE SCALE -->
+    <div class="sec-label">The scale</div>
+
+    <div class="hero-stat-row">
+      <div class="hero-num">4.1M</div>
+      <div class="hero-label">
+        <strong>Fraud SARs filed in 2025</strong>
+        by depository institutions &mdash; the baseline from which everything below is measured
+      </div>
+    </div>
+
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-num">93%</div>
+        <div class="trio-desc">of all new fraud growth is mule-related</div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-num">24.6&times;</div>
+        <div class="trio-desc">faster growth &mdash; mule fraud vs. non-mule fraud</div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-num">1.66M</div>
+        <div class="trio-desc">SARs attributed to receiving-side infrastructure &mdash; not attack-side</div>
+      </div>
+    </div>
+
+    <div class="body-copy">That last number is the one to sit with. <strong>41% of all fraud volume in 2025</strong> wasn&rsquo;t about how money left &mdash; it was about where it landed. Receiving-side infrastructure. Cash-out plumbing. The part of the operation nobody&rsquo;s watching closely enough.</div>
+
+    <!-- SECTION 3: THE MISMATCH -->
+    <div class="sec-label">Where attention goes vs. where growth is</div>
+
+    <div class="contrast-grid">
+      <div class="contrast-col left">
+        <div class="cc-label cc-label-left">Current focus</div>
+        <div class="cc-title">Stopping send-side attacks</div>
+        <div class="contrast-item"><div class="ci-dot left"></div>Better friction at point of payment</div>
+        <div class="contrast-item"><div class="ci-dot left"></div>Scam detection and interdiction</div>
+        <div class="contrast-item"><div class="ci-dot left"></div>Customer authentication layers</div>
+        <div class="contrast-item"><div class="ci-dot left"></div>Authorised push payment controls</div>
+      </div>
+      <div class="contrast-col right">
+        <div class="cc-label cc-label-right">Where growth is</div>
+        <div class="cc-title">Receiving-side infrastructure</div>
+        <div class="contrast-item"><div class="ci-dot right"></div>Mule account networks scaling fast</div>
+        <div class="contrast-item"><div class="ci-dot right"></div>Cash-out plumbing industrialised</div>
+        <div class="contrast-item"><div class="ci-dot right"></div>Receiving-side SARs up 24.6&times;</div>
+        <div class="contrast-item"><div class="ci-dot right"></div>1.66M SARs &mdash; landing, not leaving</div>
+      </div>
+    </div>
+
+    <div class="body-copy">We built better friction at the front door. <strong>Fraud networks built a warehouse round the back.</strong></div>
+
+    <!-- CLOSING -->
+    <div class="closing">
+      <div class="closing-text">Fraud networks industrialised cash-out in 2025.<br><em>In 2026, the defence has to go where the growth is.</em></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="ig-footer">
+      <div class="footer-brand">Anurag Mohapatra &middot; anuragmohapatra.com</div>
+      <div class="footer-source">Data: FinCEN Suspicious Activity Report filings, depository institutions, 2025.</div>
+    </div>
+
+  </div>
+
+  <div class="print-hint">
+    To save as image: right-click the infographic &rarr; &ldquo;Save as&rdquo; &nbsp;|&nbsp; Or use browser Print &rarr; Save as PDF &rarr; then screenshot at 1080px width
+  </div>
+</div>
+
+</body>
+</html>
