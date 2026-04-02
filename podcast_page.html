@@ -140,6 +140,12 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .podcast-hero{animation:fadeUp 0.5s ease both;}
+
+/* EPISODE PLAYER */
+.ep-player{margin-top:12px;display:none;border-radius:4px;overflow:hidden;}
+.ep-player.visible{display:block;}
+.ep-player iframe{width:100%;height:152px;border:none;border-radius:4px;display:block;}
+#latest-player{margin-top:14px;}
 </style>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="9beab7ec-4fca-460f-9ca6-0f071befbdb1"></script>
 </head>
@@ -208,9 +214,9 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       <div class="latest-meta">February 11, 2026 &middot; Guest: James McDowell</div>
       <div class="latest-desc">AI is changing more than workflows &mdash; it&rsquo;s changing how we communicate, what we trust, and how criminals manipulate people. In this episode, James McDowell joins to explore forensic cyberpsychology and what it reveals about the intersection of AI, crime, and human behaviour.</div>
       <div class="latest-actions">
-        <a href="https://open.spotify.com/show/4VzKE07GR8k34v0ofkHyQx" target="_blank"><button class="btn-listen">Listen on Spotify</button></a>
-        <a href="https://aispy.transistor.fm/episodes/forensic-cyberpsychology-how-ai-is-changing-crime-and-human-behavior" target="_blank"><button class="btn-notes">Show Notes &rarr;</button></a>
+        <button class="btn-listen" id="latest-play-btn">&#9654; Play Episode</button>
       </div>
+      <div id="latest-player" class="ep-player"></div>
     </div>
     <div class="latest-right">
       <div class="ep-badge-lg">Season 4 &middot; Episode 1</div>
@@ -616,14 +622,99 @@ function filterSeason(season, btn) {
     }
   });
   document.getElementById('ep-count').textContent = count + ' episode' + (count !== 1 ? 's' : '');
-  // hide latest feature when filtering
   const latest = document.querySelector('.latest-wrap');
   latest.style.display = season === 'all' ? '' : 'none';
 }
 </script>
 
-
 <script>
+// Spotify episode ID map — keyed by aispy.transistor.fm episode slug
+var SPOTIFY_SHOW = '4VzKE07GR8k34v0ofkHyQx';
+var EPISODE_IDS = {
+  'forensic-cyberpsychology-how-ai-is-changing-crime-and-human-behavior':'2Ou9dEeSytiWQfbFLnyW8J',
+  'investigating-modern-fraud-a-law-enforcement-perspective':'71So9Ib6dqSyFwxFU9wZLu',
+  'the-psychology-of-scams':'6AKcdF6nGu3SybNylJ0E80',
+  'the-famous-fraud-guy':'6p02wjfE6DmxjRhsItXxek',
+  'the-saturday-fraud-strategist':'358kGKSMMgr4daNVR3hUiV',
+  'breach-resilience-your-voice-isnt-yours':'6vF3GNrQuCI1Cu71z8dxoH',
+  'chasing-shadows-inside-scam-psychology-with-alex-somervell':'69I3IKqXphVI7G64cTK0gC',
+  'osint-and-financial-crime':'1duqteF69ezXAt9ejYbzdx',
+  'catfishing-and-romance-scams-with-aars':'5iwo6qYgYctvGYOMRPsAXr',
+  'stomping-out-scams-with-ken-palla':'61K31lI1t7weIPmOqw4cD7',
+  'upi-and-banking-fraud-with-anis-ahmed':'4n8TKKge4hHi9fcD007MBx',
+  'cybersecurity-trends-with-francis-west':'3QY52Op1ecSMbOfpR5cfb8',
+  'ai-doxing-and-evolving-threats-with-dan-fernandez':'7H7ChpqgAQoChYBC9QYgKa',
+  'lets-talk-dirty-money-with-christian-leuprecht':'6cEi54K2xkxIW0fwwWssu0',
+  'video-games-and-money-laundering':'6KwuoD6NQ9YxYGbDdpiK7q',
+  'hieu-ngo-a-journey-from-cybercrime-to-cybersecurity':'6Ic9rwCuDshApitXzq3EBK',
+  'revolutionizing-digital-security-with-jesse-tayler':'7zjzHifwcxBFizdQl4uUm4',
+  'ai-regulations-copyright-challenges-and-mental-wellness-with-norvin-chan':'6AqddylBh9PgHcFPSEMTsq',
+  'romance-scams-with-becky-holmes':'3ibP0BnNvNoXOomkCXebE2'
+};
+
+function buildEmbed(episodeId) {
+  var src = episodeId
+    ? 'https://open.spotify.com/embed/episode/' + episodeId + '?utm_source=generator&theme=0'
+    : 'https://open.spotify.com/embed/show/' + SPOTIFY_SHOW + '?utm_source=generator&theme=0';
+  return '<iframe src="' + src + '" width="100%" height="152" frameborder="0" allowtransparency="true"'
+    + ' allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
+}
+
+function slugFromUrl(url) {
+  var m = (url || '').match(/aispy\.transistor\.fm\/episodes\/([^'")\s]+)/);
+  return m ? m[1] : null;
+}
+
+function attachPlayer(row, spotifyId) {
+  row.removeAttribute('onclick');
+  var body = row.querySelector('.ep-body');
+  if (!body) return;
+  var playerDiv = document.createElement('div');
+  playerDiv.className = 'ep-player';
+  body.appendChild(playerDiv);
+  row.addEventListener('click', function() {
+    if (playerDiv.classList.contains('visible')) {
+      playerDiv.classList.remove('visible');
+      playerDiv.innerHTML = '';
+      return;
+    }
+    document.querySelectorAll('.ep-player.visible').forEach(function(p) {
+      p.classList.remove('visible');
+      p.innerHTML = '';
+    });
+    playerDiv.innerHTML = buildEmbed(spotifyId);
+    playerDiv.classList.add('visible');
+  });
+}
+
+// Wire up all static episode rows
+document.querySelectorAll('.episode-row').forEach(function(row) {
+  var oc = row.getAttribute('onclick') || '';
+  var slug = slugFromUrl(oc);
+  var sid = slug ? (EPISODE_IDS[slug] || null) : null;
+  attachPlayer(row, sid);
+});
+
+// Latest episode play button (S4:E1)
+var latestBtn = document.getElementById('latest-play-btn');
+var latestPlayer = document.getElementById('latest-player');
+if (latestBtn && latestPlayer) {
+  latestBtn.addEventListener('click', function() {
+    if (latestPlayer.classList.contains('visible')) {
+      latestPlayer.classList.remove('visible');
+      latestPlayer.innerHTML = '';
+      return;
+    }
+    document.querySelectorAll('.ep-player.visible').forEach(function(p) {
+      p.classList.remove('visible');
+      p.innerHTML = '';
+    });
+    latestPlayer.innerHTML = buildEmbed(EPISODE_IDS['forensic-cyberpsychology-how-ai-is-changing-crime-and-human-behavior']);
+    latestPlayer.classList.add('visible');
+  });
+}
+
+// RSS loader — injects future episodes published after the hardcoded latest date
 (function() {
   var RSS = 'https://anchor.fm/s/e472a1e8/podcast/rss';
   var PROXY = 'https://api.allorigins.win/get?url=';
@@ -669,12 +760,9 @@ function filterSeason(season, btn) {
         var dateStr = pubDate.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
         var durEl = item.querySelector('itunes\\:duration') || item.querySelector('duration');
         var duration = durEl ? durEl.textContent : '';
-        var linkEl = item.querySelector('link');
-        var link = linkEl ? linkEl.textContent.trim() : '#';
 
         var row = document.createElement('div');
         row.className = 'episode-row';
-        row.setAttribute('onclick', 'window.open(decodeURIComponent("' + encodeURIComponent(link) + '"),"_blank")');
         row.innerHTML = '<div class="ep-num-col"><span class="ep-badge">New</span>'
           + '<div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>'
           + '<div class="ep-body"><div class="ep-title">' + title + '</div>'
@@ -684,6 +772,7 @@ function filterSeason(season, btn) {
           + '<div class="ep-right"><div class="ep-duration">' + duration + '</div>'
           + '<span class="ep-arrow">&rarr;</span></div>';
 
+        attachPlayer(row, null); // use show embed until episode ID is added to EPISODE_IDS
         if (firstRow) s4.insertBefore(row, firstRow);
         else s4.appendChild(row);
       });
@@ -697,7 +786,6 @@ function filterSeason(season, btn) {
         var lpd = latest.querySelector('pubDate');
         var ldate = lpd ? new Date(lpd.textContent) : new Date();
         var ldateStr = ldate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-        var ll = latest.querySelector('link') ? latest.querySelector('link').textContent.trim() : '#';
         var ldur = latest.querySelector('itunes\\:duration') || latest.querySelector('duration');
 
         var badge = card.querySelector('.latest-badge');
@@ -706,7 +794,6 @@ function filterSeason(season, btn) {
         var descNode = card.querySelector('.latest-desc');
         var badgeLg = card.querySelector('.ep-badge-lg');
         var durNode = card.querySelector('.duration-lg');
-        var notesLink = card.querySelector('.btn-notes') ? card.querySelector('.btn-notes').parentElement : null;
 
         if (badge) badge.textContent = 'Latest Episode';
         if (titleNode) titleNode.textContent = lt;
@@ -714,7 +801,20 @@ function filterSeason(season, btn) {
         if (descNode) descNode.textContent = ld;
         if (badgeLg) badgeLg.textContent = 'New Episode';
         if (durNode && ldur) durNode.textContent = ldur.textContent;
-        if (notesLink && notesLink.tagName === 'A') notesLink.href = ll;
+
+        // Update the play button to use show embed for new episode (add ID to EPISODE_IDS when available)
+        if (latestBtn && latestPlayer) {
+          latestBtn.onclick = null;
+          latestBtn.addEventListener('click', function() {
+            if (latestPlayer.classList.contains('visible')) {
+              latestPlayer.classList.remove('visible');
+              latestPlayer.innerHTML = '';
+              return;
+            }
+            latestPlayer.innerHTML = buildEmbed(null);
+            latestPlayer.classList.add('visible');
+          });
+        }
       }
     })
     .catch(function(){});
