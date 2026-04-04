@@ -142,9 +142,9 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
 .podcast-hero{animation:fadeUp 0.5s ease both;}
 
 /* EPISODE PLAYER */
-.ep-player{margin-top:12px;display:none;border-radius:4px;overflow:hidden;}
+.ep-player{margin-top:12px;display:none;}
 .ep-player.visible{display:block;}
-.ep-player iframe{width:100%;height:152px;border:none;border-radius:4px;display:block;}
+.ep-player audio{width:100%;display:block;border-radius:3px;accent-color:var(--gold);}
 #latest-player{margin-top:14px;}
 </style>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="9beab7ec-4fca-460f-9ca6-0f071befbdb1"></script>
@@ -628,50 +628,21 @@ function filterSeason(season, btn) {
 </script>
 
 <script>
-// titleToSpotifyId is populated from the RSS feed at load time — no hardcoded IDs
-var titleToSpotifyId = {};
+// titleToEnclosure is populated from the RSS feed at load time â€” no hardcoded data needed
+var titleToEnclosure = {};
 
 function normalizeTitle(t) {
   return (t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-function spotifyIdFromText(text) {
-  var m = (text || '').match(/open\.spotify\.com\/episode\/([A-Za-z0-9]+)/);
-  return m ? m[1] : null;
+function buildAudioPlayer(url) {
+  return '<audio controls style="width:100%;display:block;accent-color:var(--gold)">'
+    + '<source src="' + url + '" type="audio/mpeg">'
+    + '</audio>';
 }
 
-function spotifyIdFromItem(item) {
-  // Anchor.fm RSS puts the Spotify episode URL in <link>
-  var links = item.getElementsByTagName('link');
-  for (var i = 0; i < links.length; i++) {
-    var id = spotifyIdFromText(links[i].textContent);
-    if (id) return id;
-  }
-  // Fallback: <guid>
-  var guids = item.getElementsByTagName('guid');
-  if (guids[0]) {
-    var id = spotifyIdFromText(guids[0].textContent);
-    if (id) return id;
-  }
-  // Fallback: <spotify:episode> (namespace-agnostic)
-  var spEps = item.getElementsByTagName('spotify:episode');
-  if (!spEps.length) spEps = item.getElementsByTagNameNS('http://www.spotify.com/ns/rss', 'episode');
-  if (spEps[0]) {
-    var t = spEps[0].textContent.trim();
-    if (/^[A-Za-z0-9]{10,}$/.test(t)) return t;
-  }
-  return null;
-}
-
-function buildEmbed(episodeId) {
-  return '<iframe src="https://open.spotify.com/embed/episode/' + episodeId
-    + '?utm_source=generator&theme=0" width="100%" height="152" frameborder="0"'
-    + ' allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"'
-    + ' loading="lazy"></iframe>';
-}
-
-// attachPlayer takes a resolver function so ID lookup happens at click time (after RSS loads)
-function attachPlayer(row, getSpotifyId) {
+// attachPlayer takes a resolver function so URL lookup happens at click time (after RSS loads)
+function attachPlayer(row, getUrl) {
   row.removeAttribute('onclick');
   var body = row.querySelector('.ep-body');
   if (!body) return;
@@ -688,22 +659,22 @@ function attachPlayer(row, getSpotifyId) {
       p.classList.remove('visible');
       p.innerHTML = '';
     });
-    var sid = getSpotifyId();
-    if (sid) {
-      playerDiv.innerHTML = buildEmbed(sid);
+    var url = getUrl();
+    if (url) {
+      playerDiv.innerHTML = buildAudioPlayer(url);
       playerDiv.classList.add('visible');
     }
   });
 }
 
-// Wire up all static episode rows — ID resolved lazily from titleToSpotifyId at click time
+// Wire up all static episode rows â€” URL resolved lazily from titleToEnclosure at click time
 document.querySelectorAll('.episode-row').forEach(function(row) {
   var titleEl = row.querySelector('.ep-title');
   var key = normalizeTitle(titleEl ? titleEl.textContent : '');
-  attachPlayer(row, function() { return titleToSpotifyId[key] || null; });
+  attachPlayer(row, function() { return titleToEnclosure[key] || null; });
 });
 
-// Wire up latest episode play button — also lazy
+// Wire up latest episode play button â€” also lazy
 var latestBtn = document.getElementById('latest-play-btn');
 var latestPlayer = document.getElementById('latest-player');
 var latestTitleEl = document.querySelector('.latest-card .latest-title');
@@ -720,15 +691,15 @@ if (latestBtn && latestPlayer) {
       p.classList.remove('visible');
       p.innerHTML = '';
     });
-    var sid = titleToSpotifyId[latestKey] || null;
-    if (sid) {
-      latestPlayer.innerHTML = buildEmbed(sid);
+    var url = titleToEnclosure[latestKey] || null;
+    if (url) {
+      latestPlayer.innerHTML = buildAudioPlayer(url);
       latestPlayer.classList.add('visible');
     }
   });
 }
 
-// RSS loader — builds Spotify ID map from feed and injects new episodes
+// RSS loader â€” builds enclosure URL map from feed and injects new episodes
 (function() {
   var RSS = 'https://anchor.fm/s/e472a1e8/podcast/rss';
   var PROXY = 'https://api.allorigins.win/get?url=';
@@ -741,13 +712,14 @@ if (latestBtn && latestPlayer) {
       var xml = parser.parseFromString(data.contents, 'text/xml');
       var items = Array.from(xml.querySelectorAll('item'));
 
-      // Build title → Spotify episode ID map from every item in the feed
+      // Build title â†’ enclosure URL map from every item in the feed
       items.forEach(function(item) {
         var titleEl = item.querySelector('title');
         var title = titleEl ? titleEl.textContent : '';
         var key = normalizeTitle(title);
-        var sid = spotifyIdFromItem(item);
-        if (sid && key) titleToSpotifyId[key] = sid;
+        var enc = item.querySelector('enclosure');
+        var url = enc ? enc.getAttribute('url') : null;
+        if (url && key) titleToEnclosure[key] = url;
       });
 
       // Inject new episodes published after the current hardcoded latest
@@ -798,7 +770,7 @@ if (latestBtn && latestPlayer) {
           + '<span class="ep-arrow">&rarr;</span></div>';
 
         (function(k) {
-          attachPlayer(row, function() { return titleToSpotifyId[k] || null; });
+          attachPlayer(row, function() { return titleToEnclosure[k] || null; });
         })(key);
         if (firstRow) s4.insertBefore(row, firstRow);
         else s4.appendChild(row);
@@ -845,9 +817,9 @@ if (latestBtn && latestPlayer) {
               p.classList.remove('visible');
               p.innerHTML = '';
             });
-            var sid = titleToSpotifyId[newKey] || null;
-            if (sid) {
-              latestPlayer.innerHTML = buildEmbed(sid);
+            var url = titleToEnclosure[newKey] || null;
+            if (url) {
+              latestPlayer.innerHTML = buildAudioPlayer(url);
               latestPlayer.classList.add('visible');
             }
           });
