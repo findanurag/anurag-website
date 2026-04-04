@@ -628,44 +628,50 @@ function filterSeason(season, btn) {
 </script>
 
 <script>
-// Spotify episode ID map — keyed by aispy.transistor.fm episode slug
-var SPOTIFY_SHOW = '4VzKE07GR8k34v0ofkHyQx';
-var EPISODE_IDS = {
-  'forensic-cyberpsychology-how-ai-is-changing-crime-and-human-behavior':'2Ou9dEeSytiWQfbFLnyW8J',
-  'investigating-modern-fraud-a-law-enforcement-perspective':'71So9Ib6dqSyFwxFU9wZLu',
-  'the-psychology-of-scams':'6AKcdF6nGu3SybNylJ0E80',
-  'the-famous-fraud-guy':'6p02wjfE6DmxjRhsItXxek',
-  'the-saturday-fraud-strategist':'358kGKSMMgr4daNVR3hUiV',
-  'breach-resilience-your-voice-isnt-yours':'6vF3GNrQuCI1Cu71z8dxoH',
-  'chasing-shadows-inside-scam-psychology-with-alex-somervell':'69I3IKqXphVI7G64cTK0gC',
-  'osint-and-financial-crime':'1duqteF69ezXAt9ejYbzdx',
-  'catfishing-and-romance-scams-with-aars':'5iwo6qYgYctvGYOMRPsAXr',
-  'stomping-out-scams-with-ken-palla':'61K31lI1t7weIPmOqw4cD7',
-  'upi-and-banking-fraud-with-anis-ahmed':'4n8TKKge4hHi9fcD007MBx',
-  'cybersecurity-trends-with-francis-west':'3QY52Op1ecSMbOfpR5cfb8',
-  'ai-doxing-and-evolving-threats-with-dan-fernandez':'7H7ChpqgAQoChYBC9QYgKa',
-  'lets-talk-dirty-money-with-christian-leuprecht':'6cEi54K2xkxIW0fwwWssu0',
-  'video-games-and-money-laundering':'6KwuoD6NQ9YxYGbDdpiK7q',
-  'hieu-ngo-a-journey-from-cybercrime-to-cybersecurity':'6Ic9rwCuDshApitXzq3EBK',
-  'revolutionizing-digital-security-with-jesse-tayler':'7zjzHifwcxBFizdQl4uUm4',
-  'ai-regulations-copyright-challenges-and-mental-wellness-with-norvin-chan':'6AqddylBh9PgHcFPSEMTsq',
-  'romance-scams-with-becky-holmes':'3ibP0BnNvNoXOomkCXebE2'
-};
+// titleToSpotifyId is populated from the RSS feed at load time — no hardcoded IDs
+var titleToSpotifyId = {};
 
-function buildEmbed(episodeId) {
-  var src = episodeId
-    ? 'https://open.spotify.com/embed/episode/' + episodeId + '?utm_source=generator&theme=0'
-    : 'https://open.spotify.com/embed/show/' + SPOTIFY_SHOW + '?utm_source=generator&theme=0';
-  return '<iframe src="' + src + '" width="100%" height="152" frameborder="0" allowtransparency="true"'
-    + ' allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
+function normalizeTitle(t) {
+  return (t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-function slugFromUrl(url) {
-  var m = (url || '').match(/aispy\.transistor\.fm\/episodes\/([^'")\s]+)/);
+function spotifyIdFromText(text) {
+  var m = (text || '').match(/open\.spotify\.com\/episode\/([A-Za-z0-9]+)/);
   return m ? m[1] : null;
 }
 
-function attachPlayer(row, spotifyId) {
+function spotifyIdFromItem(item) {
+  // Anchor.fm RSS puts the Spotify episode URL in <link>
+  var links = item.getElementsByTagName('link');
+  for (var i = 0; i < links.length; i++) {
+    var id = spotifyIdFromText(links[i].textContent);
+    if (id) return id;
+  }
+  // Fallback: <guid>
+  var guids = item.getElementsByTagName('guid');
+  if (guids[0]) {
+    var id = spotifyIdFromText(guids[0].textContent);
+    if (id) return id;
+  }
+  // Fallback: <spotify:episode> (namespace-agnostic)
+  var spEps = item.getElementsByTagName('spotify:episode');
+  if (!spEps.length) spEps = item.getElementsByTagNameNS('http://www.spotify.com/ns/rss', 'episode');
+  if (spEps[0]) {
+    var t = spEps[0].textContent.trim();
+    if (/^[A-Za-z0-9]{10,}$/.test(t)) return t;
+  }
+  return null;
+}
+
+function buildEmbed(episodeId) {
+  return '<iframe src="https://open.spotify.com/embed/episode/' + episodeId
+    + '?utm_source=generator&theme=0" width="100%" height="152" frameborder="0"'
+    + ' allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"'
+    + ' loading="lazy"></iframe>';
+}
+
+// attachPlayer takes a resolver function so ID lookup happens at click time (after RSS loads)
+function attachPlayer(row, getSpotifyId) {
   row.removeAttribute('onclick');
   var body = row.querySelector('.ep-body');
   if (!body) return;
@@ -682,22 +688,27 @@ function attachPlayer(row, spotifyId) {
       p.classList.remove('visible');
       p.innerHTML = '';
     });
-    playerDiv.innerHTML = buildEmbed(spotifyId);
-    playerDiv.classList.add('visible');
+    var sid = getSpotifyId();
+    if (sid) {
+      playerDiv.innerHTML = buildEmbed(sid);
+      playerDiv.classList.add('visible');
+    }
   });
 }
 
-// Wire up all static episode rows
+// Wire up all static episode rows — ID resolved lazily from titleToSpotifyId at click time
 document.querySelectorAll('.episode-row').forEach(function(row) {
-  var oc = row.getAttribute('onclick') || '';
-  var slug = slugFromUrl(oc);
-  var sid = slug ? (EPISODE_IDS[slug] || null) : null;
-  attachPlayer(row, sid);
+  var titleEl = row.querySelector('.ep-title');
+  var key = normalizeTitle(titleEl ? titleEl.textContent : '');
+  attachPlayer(row, function() { return titleToSpotifyId[key] || null; });
 });
 
-// Latest episode play button (S4:E1)
+// Wire up latest episode play button — also lazy
 var latestBtn = document.getElementById('latest-play-btn');
 var latestPlayer = document.getElementById('latest-player');
+var latestTitleEl = document.querySelector('.latest-card .latest-title');
+var latestKey = normalizeTitle(latestTitleEl ? latestTitleEl.textContent : '');
+
 if (latestBtn && latestPlayer) {
   latestBtn.addEventListener('click', function() {
     if (latestPlayer.classList.contains('visible')) {
@@ -709,24 +720,37 @@ if (latestBtn && latestPlayer) {
       p.classList.remove('visible');
       p.innerHTML = '';
     });
-    latestPlayer.innerHTML = buildEmbed(EPISODE_IDS['forensic-cyberpsychology-how-ai-is-changing-crime-and-human-behavior']);
-    latestPlayer.classList.add('visible');
+    var sid = titleToSpotifyId[latestKey] || null;
+    if (sid) {
+      latestPlayer.innerHTML = buildEmbed(sid);
+      latestPlayer.classList.add('visible');
+    }
   });
 }
 
-// RSS loader — injects future episodes published after the hardcoded latest date
+// RSS loader — builds Spotify ID map from feed and injects new episodes
 (function() {
   var RSS = 'https://anchor.fm/s/e472a1e8/podcast/rss';
   var PROXY = 'https://api.allorigins.win/get?url=';
   var LATEST = new Date('2026-02-11');
 
   fetch(PROXY + encodeURIComponent(RSS))
-    .then(function(r){ return r.json(); })
+    .then(function(r) { return r.json(); })
     .then(function(data) {
       var parser = new DOMParser();
       var xml = parser.parseFromString(data.contents, 'text/xml');
       var items = Array.from(xml.querySelectorAll('item'));
 
+      // Build title → Spotify episode ID map from every item in the feed
+      items.forEach(function(item) {
+        var titleEl = item.querySelector('title');
+        var title = titleEl ? titleEl.textContent : '';
+        var key = normalizeTitle(title);
+        var sid = spotifyIdFromItem(item);
+        if (sid && key) titleToSpotifyId[key] = sid;
+      });
+
+      // Inject new episodes published after the current hardcoded latest
       var newEps = items.filter(function(item) {
         var pd = item.querySelector('pubDate');
         return pd ? new Date(pd.textContent) > LATEST : false;
@@ -751,6 +775,7 @@ if (latestBtn && latestPlayer) {
       newEps.forEach(function(item) {
         var titleEl = item.querySelector('title');
         var title = titleEl ? titleEl.textContent : 'New Episode';
+        var key = normalizeTitle(title);
         var descEl = item.querySelector('description');
         var rawDesc = descEl ? descEl.textContent : '';
         var desc = rawDesc.replace(/<[^>]+>/g, '').trim();
@@ -772,11 +797,14 @@ if (latestBtn && latestPlayer) {
           + '<div class="ep-right"><div class="ep-duration">' + duration + '</div>'
           + '<span class="ep-arrow">&rarr;</span></div>';
 
-        attachPlayer(row, null); // use show embed until episode ID is added to EPISODE_IDS
+        (function(k) {
+          attachPlayer(row, function() { return titleToSpotifyId[k] || null; });
+        })(key);
         if (firstRow) s4.insertBefore(row, firstRow);
         else s4.appendChild(row);
       });
 
+      // Update latest card to reflect newest episode
       var latest = newEps[0];
       var card = document.querySelector('.latest-card');
       if (latest && card) {
@@ -787,6 +815,7 @@ if (latestBtn && latestPlayer) {
         var ldate = lpd ? new Date(lpd.textContent) : new Date();
         var ldateStr = ldate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
         var ldur = latest.querySelector('itunes\\:duration') || latest.querySelector('duration');
+        var newKey = normalizeTitle(lt);
 
         var badge = card.querySelector('.latest-badge');
         var titleNode = card.querySelector('.latest-title');
@@ -802,17 +831,25 @@ if (latestBtn && latestPlayer) {
         if (badgeLg) badgeLg.textContent = 'New Episode';
         if (durNode && ldur) durNode.textContent = ldur.textContent;
 
-        // Update the play button to use show embed for new episode (add ID to EPISODE_IDS when available)
+        // Rebind latest play button to new episode (replace node to clear old listener)
         if (latestBtn && latestPlayer) {
-          latestBtn.onclick = null;
-          latestBtn.addEventListener('click', function() {
+          var newBtn = latestBtn.cloneNode(true);
+          latestBtn.parentNode.replaceChild(newBtn, latestBtn);
+          newBtn.addEventListener('click', function() {
             if (latestPlayer.classList.contains('visible')) {
               latestPlayer.classList.remove('visible');
               latestPlayer.innerHTML = '';
               return;
             }
-            latestPlayer.innerHTML = buildEmbed(null);
-            latestPlayer.classList.add('visible');
+            document.querySelectorAll('.ep-player.visible').forEach(function(p) {
+              p.classList.remove('visible');
+              p.innerHTML = '';
+            });
+            var sid = titleToSpotifyId[newKey] || null;
+            if (sid) {
+              latestPlayer.innerHTML = buildEmbed(sid);
+              latestPlayer.classList.add('visible');
+            }
           });
         }
       }
