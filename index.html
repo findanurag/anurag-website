@@ -152,6 +152,20 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
 .hero-left{animation:fadeUp 0.6s ease both;}
 .cred-strip{animation:fadeUp 0.6s 0.1s ease both;}
 .stats-row{animation:fadeUp 0.6s 0.2s ease both;}
+
+/* INFOGRAPHIC PREVIEW */
+.ig-preview{background:var(--navy);border-radius:4px;overflow:hidden;text-decoration:none;display:block;}
+.ig-preview:hover .ig-prev-headline{color:var(--gold-light,#e8d4a0);}
+.ig-prev-body{padding:2rem 2rem 0;}
+.ig-prev-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;}
+.ig-prev-headline{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--white);line-height:1.25;transition:color 0.15s;}
+.ig-prev-headline em{font-style:italic;}
+.ig-preview-link{display:inline-block;margin-top:1.25rem;font-size:11px;font-weight:500;color:var(--gold);border:0.5px solid rgba(201,168,76,0.4);padding:5px 14px;border-radius:3px;}
+.ig-prev-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:0.5px solid rgba(255,255,255,0.1);margin-top:1.75rem;}
+.ig-prev-stat{padding:1.25rem 1.5rem;border-right:0.5px solid rgba(255,255,255,0.1);}
+.ig-prev-stat:last-child{border-right:none;}
+.ig-prev-stat-num{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--gold);line-height:1;}
+.ig-prev-stat-label{font-size:10px;color:#8fa3c7;margin-top:4px;line-height:1.4;}
 </style>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="9beab7ec-4fca-460f-9ca6-0f071befbdb1"></script>
 </head>
@@ -336,6 +350,11 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
 
   </div>
 
+  <div class="section-divider"></div>
+
+  <!-- LATEST INFOGRAPHIC — populated from infographics.json -->
+  <div id="ig-latest-section"></div>
+
   <!-- ABOUT STRIP -->
   <div class="section-divider"></div>
 
@@ -404,5 +423,34 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
   <div class="footer-copy">&copy; 2026 &middot; anuragmohapatra.com</div>
 </footer>
 
+<script>
+fetch('infographics.json')
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (!data || !data.length) return;
+    var ig = data[0];
+    var statsHtml = ig.stats.map(function(s) {
+      return '<div class="ig-prev-stat">'
+        + '<div class="ig-prev-stat-num">' + s.num + '</div>'
+        + '<div class="ig-prev-stat-label">' + s.label + '</div>'
+        + '</div>';
+    }).join('');
+    document.getElementById('ig-latest-section').innerHTML =
+      '<div class="section-header" style="margin-bottom:1rem">'
+      + '<div><div class="section-label">Visual Intelligence</div>'
+      + '<div class="section-title">Latest infographic</div></div>'
+      + '<a class="section-link" href="infographics_page.html">All infographics &rarr;</a>'
+      + '</div>'
+      + '<a class="ig-preview" href="infographics_page.html">'
+      + '<div class="ig-prev-body">'
+      + '<div class="ig-prev-eyebrow">' + ig.eyebrow + '</div>'
+      + '<div class="ig-prev-headline">' + ig.headline + ' <em>' + ig.headline_em + '</em></div>'
+      + '<span class="ig-preview-link">View infographic \u2192</span>'
+      + '</div>'
+      + '<div class="ig-prev-stats">' + statsHtml + '</div>'
+      + '</a>';
+  })
+  .catch(function(){});
+</script>
 </body>
 </html>

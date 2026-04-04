@@ -1,0 +1,50 @@
+[
+  {
+    "id": "mules",
+    "title": "While We Watched Scams, Fraud Networks Built Infrastructure",
+    "topic": "Fraud infrastructure",
+    "year": "2025",
+    "filename": "infographics_page.html",
+    "stats": [
+      { "num": "4.1M", "label": "Fraud SARs filed in 2025" },
+      { "num": "93%", "label": "of new fraud growth is mule-related" },
+      { "num": "24.6\u00d7", "label": "faster growth vs non-mule fraud" },
+      { "num": "1.66M", "label": "receiving-side SARs" }
+    ],
+    "eyebrow": "Financial crime analysis \u00b7 2025",
+    "headline": "While We Watched Scams,",
+    "headline_em": "Fraud Networks Built Infrastructure."
+  },
+  {
+    "id": "scamact",
+    "title": "The SCAM Act Changes the Rules. Here\u2019s What It Actually Means.",
+    "topic": "Regulatory",
+    "year": "2026",
+    "filename": "infographics_page.html",
+    "stats": [
+      { "num": "72hrs", "label": "Platform must investigate" },
+      { "num": "+24hrs", "label": "Must notify reporter" },
+      { "num": "3\u00d7", "label": "Treble damages for wilful violations" },
+      { "num": "\u00a7230", "label": "Immunity ends for paid ads" }
+    ],
+    "eyebrow": "Proposed legislation \u00b7 2026",
+    "headline": "The SCAM Act Changes the Rules.",
+    "headline_em": "Here\u2019s What It Actually Means."
+  },
+  {
+    "id": "scamliability",
+    "title": "Scam Liability Spectrum Across Asia",
+    "topic": "Regulatory",
+    "year": "2025",
+    "filename": "infographics_page.html",
+    "stats": [
+      { "num": "12", "label": "Asian markets mapped" },
+      { "num": "3", "label": "Tiers of liability framework" },
+      { "num": "UK", "label": "Reimbursement benchmark" },
+      { "num": "AU", "label": "Prevention-first benchmark" }
+    ],
+    "eyebrow": "Regulatory analysis \u00b7 2025",
+    "headline": "Scam Liability Spectrum",
+    "headline_em": "Across Asia."
+  }
+]
