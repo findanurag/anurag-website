@@ -144,7 +144,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
 /* EPISODE PLAYER */
 .ep-player{margin-top:12px;display:none;}
 .ep-player.visible{display:block;}
-.ep-player audio{width:100%;display:block;border-radius:3px;accent-color:var(--gold);}
+.ep-player iframe,.spotify-embed-frame{width:100%;display:block;border:0;border-radius:12px;min-height:152px;background:var(--off);}
 #latest-player{margin-top:14px;}
 </style>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="9beab7ec-4fca-460f-9ca6-0f071befbdb1"></script>
@@ -237,7 +237,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       <span class="season-title">Season 4 &middot; 2026</span>
       <span class="season-count">1 episode</span>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/forensic-cyberpsychology-how-ai-is-changing-crime-and-human-behavior','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col">
         <span class="ep-badge">S4:E1</span>
         <div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
@@ -264,7 +264,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       <span class="season-title">Season 3 &middot; 2025</span>
       <span class="season-count">8 episodes</span>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/investigating-modern-fraud-a-law-enforcement-perspective','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S3:E8</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Investigating Modern Fraud: A Law Enforcement Perspective</div>
@@ -274,7 +274,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">33:41</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/the-psychology-of-scams','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S3:E7</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">The Psychology of Scams</div>
@@ -284,7 +284,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">22:30</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/the-famous-fraud-guy','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S3:E6</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">The Famous Fraud Guy</div>
@@ -294,7 +294,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">37:11</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/the-saturday-fraud-strategist','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S3:E5</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">The Saturday Fraud Strategist</div>
@@ -304,7 +304,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">26:32</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/breach-resilience-your-voice-isnt-yours','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S3:E4</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Breach Resilience: Your Voice Isn&rsquo;t Yours</div>
@@ -314,7 +314,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">17:57</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/chasing-shadows-inside-scam-psychology-with-alex-somervell','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S3:E3</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Chasing Shadows: Inside Scam Psychology with Alex Somervell</div>
@@ -324,7 +324,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">26:06</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/osint-and-financial-crime','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S3:E2</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">OSINT and Financial Crime</div>
@@ -334,7 +334,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">22:32</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/catfishing-and-romance-scams-with-aars','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S3:E1</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Catfishing and Romance Scams with AARS</div>
@@ -352,7 +352,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       <span class="season-title">Season 2 &middot; 2024</span>
       <span class="season-count">13 episodes</span>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/stomping-out-scams-with-ken-palla','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E13</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Stomping Out Scams with Ken Palla</div>
@@ -362,7 +362,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">35:07</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/upi-and-banking-fraud-with-anis-ahmed','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E12</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">UPI and Banking Fraud with Anis Ahmed</div>
@@ -372,7 +372,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">43:02</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/cybersecurity-trends-with-francis-west','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E11</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Cybersecurity Trends with Francis West</div>
@@ -382,7 +382,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">13:54</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/ai-doxing-and-evolving-threats-with-dan-fernandez','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E10</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">AI, Doxing, and Evolving Threats with Dan Fernandez</div>
@@ -392,7 +392,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">25:22</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/lets-talk-dirty-money-with-christian-leuprecht','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E9</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Let&rsquo;s Talk Dirty Money with Christian Leuprecht</div>
@@ -402,7 +402,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">27:03</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/video-games-and-money-laundering','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E8</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Video Games and Money Laundering</div>
@@ -412,7 +412,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">26:46</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/hieu-ngo-a-journey-from-cybercrime-to-cybersecurity','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E7</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Hieu Ngo: A Journey from Cybercrime to Cybersecurity</div>
@@ -422,7 +422,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">37:53</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/revolutionizing-digital-security-with-jesse-tayler','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E6</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Revolutionizing Digital Security with Jesse Tayler</div>
@@ -432,7 +432,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">43:34</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/ai-regulations-copyright-challenges-and-mental-wellness-with-norvin-chan','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E5</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">AI Regulations, Copyright Challenges, and Mental Wellness</div>
@@ -442,7 +442,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">29:42</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/romance-scams-with-becky-holmes','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E4</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Romance Scams with Becky Holmes</div>
@@ -452,7 +452,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">28:59</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/guarding-your-data-with-francis-west','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E3</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Guarding Your Data with Francis West</div>
@@ -462,7 +462,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">32:06</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/scammed-into-scamming','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E2</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Scammed into Scamming</div>
@@ -472,7 +472,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">36:58</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/exploring-deep-fakes-and-banking-fraud','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S2:E1</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Exploring Deep Fakes and Banking Fraud</div>
@@ -488,10 +488,10 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
   <div class="season-section" data-season="s1">
     <div class="season-header">
       <span class="season-title">Season 1 &middot; 2023</span>
-      <span class="season-count">10 episodes</span>
+      <span class="season-count">11 episodes</span>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/talking-scams-with-jorij-abraham','_blank')">
-      <div class="ep-num-col"><span class="ep-badge">S1:E10</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
+    <div class="episode-row">
+      <div class="ep-num-col"><span class="ep-badge">S1:E11</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Talking Scams with Jorij Abraham</div>
         <div class="ep-desc">Jorij Abraham, General Manager of ScamAdvisor and driving force at GASA, on scams as a global threat transcending geographical boundaries.</div>
@@ -500,7 +500,17 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">20:32</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/lifetime-of-fighting-fraud-with-doug-shadel','_blank')">
+    <div class="episode-row">
+      <div class="ep-num-col"><span class="ep-badge">S1:E10</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
+      <div class="ep-body">
+        <div class="ep-title">What the FRAML</div>
+        <div class="ep-desc">Vic an authority in financial crime prevention, shares his extensive background and experience in the industry, dissecting the obstacles preventing FRAML from becoming a reality.</div>
+        <div class="ep-meta-row"><span class="ep-date">Dec 10, 2023</span><span class="ep-guest">Vic Maculatis</span></div>
+        <span class="ep-topic t-scam">FRAML</span>
+      </div>
+      <div class="ep-right"><div class="ep-duration">20:32</div><span class="ep-arrow">&rarr;</span></div>
+    </div>
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S1:E9</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">A Lifetime of Fighting Fraud with Doug Shadel</div>
@@ -510,7 +520,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">25:43</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/unmasking-identity-theft-with-dr-axton-betz-hamilton','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S1:E8</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Unmasking Identity Theft: With Dr. Axton Betz-Hamilton</div>
@@ -520,7 +530,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">24:56</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/cyber-brew-unveiling-cybersecurity-risk-and-money-mules','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S1:E7</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Cyber Brew: Unveiling Cybersecurity Risk and Money Mules</div>
@@ -530,7 +540,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">29:55</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/crafting-conversations-with-prompt-engineering','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S1:E6</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Crafting Conversations with Prompt Engineering</div>
@@ -540,7 +550,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">23:45</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/dark-web-and-banking-fraud-david-maimon','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S1:E5</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Dark Web and Banking Fraud: David Maimon</div>
@@ -550,7 +560,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">22:53</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/unraveling-the-secrets-of-mail-theft-frank-albergo','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S1:E3</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Unraveling the Secrets of Mail Theft: Frank Albergo</div>
@@ -560,7 +570,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">21:20</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/generative-ai-data-privacy-and-security-risks','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S1:E2</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Generative AI: Data Privacy and Security Risks</div>
@@ -570,7 +580,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       </div>
       <div class="ep-right"><div class="ep-duration">25:51</div><span class="ep-arrow">&rarr;</span></div>
     </div>
-    <div class="episode-row" onclick="window.open('https://aispy.transistor.fm/episodes/generative-ai-and-its-impact-tejas-shastry','_blank')">
+    <div class="episode-row">
       <div class="ep-num-col"><span class="ep-badge">S1:E1</span><div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>
       <div class="ep-body">
         <div class="ep-title">Generative AI and Its Impact: Tejas Shastry</div>
@@ -601,8 +611,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/anuragmohapatra/" target="_blank">LinkedIn</a>
     <a href="podcast_page.html">AI Spy Podcast</a>
-    <a href="#">Finextra</a>
-    <a href="#">Newsletter</a>
+    <a href="https://www.finextra.com/bloggers/146061" target="_blank">Finextra</a>
   </div>
   <div class="footer-copy">&copy; 2026 &middot; anuragmohapatra.com</div>
 </footer>
@@ -628,130 +637,249 @@ function filterSeason(season, btn) {
 </script>
 
 <script>
-// titleToEnclosure is populated from the RSS feed at load time â€” no hardcoded data needed
-var titleToEnclosure = {};
+// Spotify episode ID map — normalised title key: Spotify episode ID
+// To add a new episode: copy the Spotify episode URL, extract the ID after /episode/
+// Add one line: 'normalised-title-with-hyphens': 'SPOTIFY_ID',
+var EPISODE_IDS = {
+  'forensic-cyberpsychology-how-ai-is-changing-crime-and-human-behavior': '2Ou9dEeSytiWQfbFLnyW8J',
+  'investigating-modern-fraud-a-law-enforcement-perspective': '71So9Ib6dqSyFwxFU9wZLu',
+  'the-psychology-of-scams': '6AKcdF6nGu3SybNylJ0E80',
+  'the-famous-fraud-guy': '6p02wjfE6DmxjRhsItXxek',
+  'the-saturday-fraud-strategist': '358kGKSMMgr4daNVR3hUiV',
+  'breach-resilience-your-voice-isn-t-yours': '6vF3GNrQuCI1Cu71z8dxoH',
+  'chasing-shadows-inside-scam-psychology-with-alex-somervell': '69I3IKqXphVI7G64cTK0gC',
+  'osint-and-financial-crime': '1duqteF69ezXAt9ejYbzdx',
+  'catfishing-and-romance-scams-with-aars': '5iwo6qYgYctvGYOMRPsAXr',
+  'stomping-out-scams-with-ken-palla': '61K31lI1t7weIPmOqw4cD7',
+  'upi-and-banking-fraud-with-anis-ahmed': '4n8TKKge4hHi9fcD007MBx',
+  'cybersecurity-trends-with-francis-west': '3QY52Op1ecSMbOfpR5cfb8',
+  'ai-doxing-and-evolving-threats-with-dan-fernandez': '7H7ChpqgAQoChYBC9QYgKa',
+  'let-s-talk-dirty-money-with-christian-leuprecht': '6cEi54K2xkxIW0fwwWssu0',
+  'video-games-and-money-laundering': '6KwuoD6NQ9YxYGbDdpiK7q',
+  'hieu-ngo-a-journey-from-cybercrime-to-cybersecurity': '6Ic9rwCuDshApitXzq3EBK',
+  'revolutionizing-digital-security-with-jesse-tayler': '7zjzHifwcxBFizdQl4uUm4',
+  'ai-regulations-copyright-challenges-and-mental-wellness': '6AqddylBh9PgHcFPSEMTsq',
+  'romance-scams-with-becky-holmes': '3ibP0BnNvNoXOomkCXebE2',
+  'guarding-your-data-with-francis-west': '59WU7Eb2q9Secte5UX4Cy1',
+  'scammed-into-scamming': '1CqFytD708gUirsJr0JjUI',
+  'exploring-deep-fakes-and-banking-fraud': '3TuIRBCSrxcdEkAEpR82pN',
+  'talking-scams-with-jorij-abraham': '6su8AtgAyFFIWxly4ZqPxi',
+  'what-the-framl': '0Zw0ykQGGn2VKS4y63hXSz',
+  'a-lifetime-of-fighting-fraud-with-doug-shadel': '5aFmQlxWZrK6BSkSRNHwph',
+  'unmasking-identity-theft-with-dr-axton-betz-hamilton': '27YHx1UjGMxyiyPDaAZsfI',
+  'cyber-brew-unveiling-cybersecurity-risk-and-money-mules': '6JerhyVWjHAgkYoguFVlKb',
+  'crafting-conversations-with-prompt-engineering': '0BNfdf6KA689PIbWyLOkIi',
+  'dark-web-and-banking-fraud-david-maimon': '2o5JzOaOL9wOpGA1mMh8cU',
+  'unraveling-the-secrets-of-mail-theft-frank-albergo': '4ymjGeltCr1vnxZin7Sg1m',
+  'generative-ai-data-privacy-and-security-risks': '5piVPYq9texAOaNWjDsKVh',
+  'generative-ai-and-its-impact-tejas-shastry': '6nQHsGB52NjVM74AMGP5Q8',
+};
+
+var SHOW_ID = '4VzKE07GR8k34v0ofkHyQx';
+var titleToEpisode = {};
+
+function seedTitleToEpisodeFromPage() {
+  document.querySelectorAll('.episode-row').forEach(function(row) {
+    var titleEl = row.querySelector('.ep-title');
+    var key = normalizeTitle(titleEl ? titleEl.textContent : '');
+    if (!key || !EPISODE_IDS[key] || titleToEpisode[key]) return;
+    titleToEpisode[key] = { episodeId: EPISODE_IDS[key], link: null, enclosure: null };
+  });
+
+  var latestTitleEl = document.querySelector('.latest-card .latest-title');
+  var latestKey = normalizeTitle(latestTitleEl ? latestTitleEl.textContent : '');
+  if (latestKey && EPISODE_IDS[latestKey] && !titleToEpisode[latestKey]) {
+    titleToEpisode[latestKey] = { episodeId: EPISODE_IDS[latestKey], link: null, enclosure: null };
+  }
+}
 
 function normalizeTitle(t) {
   return (t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-function buildAudioPlayer(url) {
-  return '<audio controls style="width:100%;display:block;accent-color:var(--gold)">'
-    + '<source src="' + url + '" type="audio/mpeg">'
-    + '</audio>';
+function escapeHtml(str) {
+  return (str || '').replace(/[&<>"']/g, function(ch) {
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+  });
 }
 
-// attachPlayer takes a resolver function so URL lookup happens at click time (after RSS loads)
-function attachPlayer(row, getUrl) {
+function extractSpotifyEpisodeIdFromText(text) {
+  if (!text) return null;
+  var patterns = [
+    /spotify:episode:([A-Za-z0-9]+)/i,
+    /open\.spotify\.com\/episode\/([A-Za-z0-9]+)/i,
+    /creators\.spotify\.com\/pod\/profile\/[^\s]+\/episodes\/[^\s?#]+-([A-Za-z0-9]+)(?:[?#].*)?$/i,
+    /spotify\.com\/pod\/show\/[^\s]+\/episode\/([A-Za-z0-9]+)/i,
+    /spotify\.com\/episode\/([A-Za-z0-9]+)/i
+  ];
+  for (var i = 0; i < patterns.length; i++) {
+    var match = text.match(patterns[i]);
+    if (match && match[1]) return match[1];
+  }
+  return null;
+}
+
+function extractEpisodeData(item) {
+  // Check hardcoded map first — most reliable source of episode IDs
+  var titleEl = item.querySelector('title');
+  var title = titleEl ? titleEl.textContent : '';
+  var key = normalizeTitle(title);
+  if (EPISODE_IDS[key]) {
+    var linkEl = item.querySelector('link');
+    var enc = item.querySelector('enclosure');
+    return {
+      episodeId: EPISODE_IDS[key],
+      link: linkEl ? linkEl.textContent : null,
+      enclosure: enc ? enc.getAttribute('url') : null
+    };
+  }
+
+  var linkEl = item.querySelector('link');
+  var guidEl = item.querySelector('guid');
+  var enc = item.querySelector('enclosure');
+  var descEl = item.querySelector('description');
+  var rawCandidates = [
+    linkEl ? linkEl.textContent : '',
+    guidEl ? guidEl.textContent : '',
+    enc ? enc.getAttribute('url') : '',
+    descEl ? descEl.textContent : ''
+  ].filter(Boolean);
+
+  var episodeId = null;
+  for (var i = 0; i < rawCandidates.length; i++) {
+    episodeId = extractSpotifyEpisodeIdFromText(rawCandidates[i]);
+    if (episodeId) break;
+  }
+
+  return {
+    episodeId: episodeId,
+    link: linkEl ? linkEl.textContent : null,
+    enclosure: enc ? enc.getAttribute('url') : null
+  };
+}
+
+function getEmbedHtml(meta, height) {
+  var src = meta && meta.episodeId
+    ? 'https://open.spotify.com/embed/episode/' + meta.episodeId + '?utm_source=generator'
+    : 'https://open.spotify.com/embed/show/' + SHOW_ID + '?utm_source=generator';
+  var frameHeight = height || (meta && meta.episodeId ? 152 : 232);
+  return '<iframe class="spotify-embed-frame"'
+    + ' src="' + src + '"'
+    + ' width="100%"'
+    + ' height="' + frameHeight + '"'
+    + ' frameborder="0"'
+    + ' allowfullscreen=""'
+    + ' loading="lazy"'
+    + ' allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
+}
+
+function closeAllPlayers() {
+  document.querySelectorAll('.ep-player.visible').forEach(function(p) {
+    p.classList.remove('visible');
+    p.innerHTML = '';
+  });
+  var latestPlayer = document.getElementById('latest-player');
+  if (latestPlayer) {
+    latestPlayer.classList.remove('visible');
+    latestPlayer.innerHTML = '';
+  }
+}
+
+function attachPlayer(row, getMeta) {
   row.removeAttribute('onclick');
   var body = row.querySelector('.ep-body');
   if (!body) return;
   var playerDiv = document.createElement('div');
   playerDiv.className = 'ep-player';
   body.appendChild(playerDiv);
-  row.addEventListener('click', function() {
+  row.addEventListener('click', function(e) {
+    if (e.target.closest('a, button, iframe')) return;
     if (playerDiv.classList.contains('visible')) {
       playerDiv.classList.remove('visible');
       playerDiv.innerHTML = '';
       return;
     }
-    document.querySelectorAll('.ep-player.visible').forEach(function(p) {
-      p.classList.remove('visible');
-      p.innerHTML = '';
-    });
-    var url = getUrl();
-    if (url) {
-      playerDiv.innerHTML = buildAudioPlayer(url);
-      playerDiv.classList.add('visible');
-    }
+    closeAllPlayers();
+    var meta = getMeta() || null;
+    playerDiv.innerHTML = getEmbedHtml(meta, meta && meta.episodeId ? 152 : 232);
+    playerDiv.classList.add('visible');
   });
 }
 
-// Wire up all static episode rows â€” URL resolved lazily from titleToEnclosure at click time
-document.querySelectorAll('.episode-row').forEach(function(row) {
-  var titleEl = row.querySelector('.ep-title');
-  var key = normalizeTitle(titleEl ? titleEl.textContent : '');
-  attachPlayer(row, function() { return titleToEnclosure[key] || null; });
-});
-
-// Wire up latest episode play button â€” also lazy
-var latestBtn = document.getElementById('latest-play-btn');
-var latestPlayer = document.getElementById('latest-player');
-var latestTitleEl = document.querySelector('.latest-card .latest-title');
-var latestKey = normalizeTitle(latestTitleEl ? latestTitleEl.textContent : '');
-
-if (latestBtn && latestPlayer) {
-  latestBtn.addEventListener('click', function() {
+function bindLatestButton() {
+  var latestBtn = document.getElementById('latest-play-btn');
+  var latestPlayer = document.getElementById('latest-player');
+  var latestTitleEl = document.querySelector('.latest-card .latest-title');
+  if (!latestBtn || !latestPlayer || !latestTitleEl) return;
+  var latestKey = normalizeTitle(latestTitleEl.textContent || '');
+  var freshBtn = latestBtn.cloneNode(true);
+  latestBtn.parentNode.replaceChild(freshBtn, latestBtn);
+  freshBtn.addEventListener('click', function() {
     if (latestPlayer.classList.contains('visible')) {
       latestPlayer.classList.remove('visible');
       latestPlayer.innerHTML = '';
       return;
     }
-    document.querySelectorAll('.ep-player.visible').forEach(function(p) {
-      p.classList.remove('visible');
-      p.innerHTML = '';
-    });
-    var url = titleToEnclosure[latestKey] || null;
-    if (url) {
-      latestPlayer.innerHTML = buildAudioPlayer(url);
-      latestPlayer.classList.add('visible');
-    }
+    closeAllPlayers();
+    var meta = titleToEpisode[latestKey] || (EPISODE_IDS[latestKey] ? { episodeId: EPISODE_IDS[latestKey], link: null, enclosure: null } : null);
+    latestPlayer.innerHTML = getEmbedHtml(meta, meta && meta.episodeId ? 152 : 232);
+    latestPlayer.classList.add('visible');
+    latestPlayer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
 }
 
-// RSS loader â€” builds enclosure URL map from feed and injects new episodes
+seedTitleToEpisodeFromPage();
+
+document.querySelectorAll('.episode-row').forEach(function(row) {
+  var titleEl = row.querySelector('.ep-title');
+  var key = normalizeTitle(titleEl ? titleEl.textContent : '');
+  attachPlayer(row, function() {
+    if (titleToEpisode[key]) return titleToEpisode[key];
+    if (EPISODE_IDS[key]) return { episodeId: EPISODE_IDS[key], link: null, enclosure: null };
+    return null;
+  });
+});
+
+bindLatestButton();
+
 (function() {
   var RSS = 'https://anchor.fm/s/e472a1e8/podcast/rss';
+  var PROXY = 'https://api.allorigins.win/get?url=';
   var LATEST = new Date('2026-02-11');
 
-  // Two-proxy fallback chain: tries corsproxy.io first, falls back to allorigins
-  var PROXIES = [
-    {
-      wrap: function(u) { return 'https://corsproxy.io/?' + encodeURIComponent(u); },
-      parse: function(r) { return r.text(); }
-    },
-    {
-      wrap: function(u) { return 'https://api.allorigins.win/get?url=' + encodeURIComponent(u); },
-      parse: function(r) { return r.json().then(function(d) { return d.contents; }); }
-    }
-  ];
-
-  function tryProxy(index) {
-    if (index >= PROXIES.length) return;
-    var proxy = PROXIES[index];
-    fetch(proxy.wrap(RSS))
-      .then(function(r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return proxy.parse(r);
-      })
-      .then(function(xmlText) { handleFeed(xmlText); })
-      .catch(function() { tryProxy(index + 1); });
-  }
-
-  function handleFeed(xmlText) {
+  fetch(PROXY + encodeURIComponent(RSS))
+    .then(function(r) {
+      if (!r.ok) throw new Error('RSS request failed with status ' + r.status);
+      return r.json();
+    })
+    .then(function(data) {
+      if (!data || !data.contents) throw new Error('RSS response was empty');
       var parser = new DOMParser();
-      var xml = parser.parseFromString(xmlText, 'text/xml');
+      var xml = parser.parseFromString(data.contents, 'text/xml');
       var items = Array.from(xml.querySelectorAll('item'));
 
-      // Build title â†’ enclosure URL map from every item in the feed
       items.forEach(function(item) {
         var titleEl = item.querySelector('title');
         var title = titleEl ? titleEl.textContent : '';
         var key = normalizeTitle(title);
-        var enc = item.querySelector('enclosure');
-        var url = enc ? enc.getAttribute('url') : null;
-        if (url && key) titleToEnclosure[key] = url;
+        var meta = extractEpisodeData(item);
+        if (key) titleToEpisode[key] = meta;
       });
 
-      // Inject new episodes published after the current hardcoded latest
       var newEps = items.filter(function(item) {
         var pd = item.querySelector('pubDate');
         return pd ? new Date(pd.textContent) > LATEST : false;
       });
-      if (!newEps.length) return;
+      if (!newEps.length) {
+        bindLatestButton();
+        return;
+      }
 
       var s4 = document.querySelector('.season-section[data-season="s4"]');
-      if (!s4) return;
+      if (!s4) {
+        bindLatestButton();
+        return;
+      }
 
       var firstRow = s4.querySelector('.episode-row');
       var existingCount = s4.querySelectorAll('.episode-row').length;
@@ -776,28 +904,25 @@ if (latestBtn && latestPlayer) {
         var pd = item.querySelector('pubDate');
         var pubDate = pd ? new Date(pd.textContent) : new Date();
         var dateStr = pubDate.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
-        var durEl = item.querySelector('itunes\\:duration') || item.querySelector('duration');
+        var durEl = item.querySelector('itunes\:duration') || item.querySelector('duration');
         var duration = durEl ? durEl.textContent : '';
 
         var row = document.createElement('div');
         row.className = 'episode-row';
         row.innerHTML = '<div class="ep-num-col"><span class="ep-badge">New</span>'
           + '<div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>'
-          + '<div class="ep-body"><div class="ep-title">' + title + '</div>'
-          + '<div class="ep-desc">' + desc + '</div>'
-          + '<div class="ep-meta-row"><span class="ep-date">' + dateStr + '</span></div>'
+          + '<div class="ep-body"><div class="ep-title">' + escapeHtml(title) + '</div>'
+          + '<div class="ep-desc">' + escapeHtml(desc) + '</div>'
+          + '<div class="ep-meta-row"><span class="ep-date">' + escapeHtml(dateStr) + '</span></div>'
           + '<span class="ep-topic t-ai">New Episode</span></div>'
-          + '<div class="ep-right"><div class="ep-duration">' + duration + '</div>'
+          + '<div class="ep-right"><div class="ep-duration">' + escapeHtml(duration) + '</div>'
           + '<span class="ep-arrow">&rarr;</span></div>';
 
-        (function(k) {
-          attachPlayer(row, function() { return titleToEnclosure[k] || null; });
-        })(key);
+        attachPlayer(row, function() { return titleToEpisode[key] || null; });
         if (firstRow) s4.insertBefore(row, firstRow);
         else s4.appendChild(row);
       });
 
-      // Update latest card to reflect newest episode
       var latest = newEps[0];
       var card = document.querySelector('.latest-card');
       if (latest && card) {
@@ -807,8 +932,7 @@ if (latestBtn && latestPlayer) {
         var lpd = latest.querySelector('pubDate');
         var ldate = lpd ? new Date(lpd.textContent) : new Date();
         var ldateStr = ldate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-        var ldur = latest.querySelector('itunes\\:duration') || latest.querySelector('duration');
-        var newKey = normalizeTitle(lt);
+        var ldur = latest.querySelector('itunes\:duration') || latest.querySelector('duration');
 
         var badge = card.querySelector('.latest-badge');
         var titleNode = card.querySelector('.latest-title');
@@ -823,32 +947,14 @@ if (latestBtn && latestPlayer) {
         if (descNode) descNode.textContent = ld;
         if (badgeLg) badgeLg.textContent = 'New Episode';
         if (durNode && ldur) durNode.textContent = ldur.textContent;
-
-        // Rebind latest play button to new episode (replace node to clear old listener)
-        if (latestBtn && latestPlayer) {
-          var newBtn = latestBtn.cloneNode(true);
-          latestBtn.parentNode.replaceChild(newBtn, latestBtn);
-          newBtn.addEventListener('click', function() {
-            if (latestPlayer.classList.contains('visible')) {
-              latestPlayer.classList.remove('visible');
-              latestPlayer.innerHTML = '';
-              return;
-            }
-            document.querySelectorAll('.ep-player.visible').forEach(function(p) {
-              p.classList.remove('visible');
-              p.innerHTML = '';
-            });
-            var url = titleToEnclosure[newKey] || null;
-            if (url) {
-              latestPlayer.innerHTML = buildAudioPlayer(url);
-              latestPlayer.classList.add('visible');
-            }
-          });
-        }
       }
-  }
 
-  tryProxy(0);
+      bindLatestButton();
+    })
+    .catch(function(err) {
+      console.error('AI Spy RSS load failed:', err);
+      bindLatestButton();
+    });
 })();
 </script>
 </body>
