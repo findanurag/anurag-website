@@ -66,10 +66,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .pod-title{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink);line-height:1.35;margin-bottom:6px;}
 .pod-meta{font-size:11px;color:var(--muted);margin-bottom:8px;}
 .pod-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:12px;}
-.pod-player{background:var(--navy);border-radius:3px;padding:10px 14px;}
-.pp-label{font-size:9px;color:#8fa3c7;margin-bottom:6px;letter-spacing:0.05em;text-transform:uppercase;}
-audio{width:100%;height:32px;accent-color:var(--gold);}
-audio::-webkit-media-controls-panel{background:var(--navy);}
+.pod-player{margin-top:12px;}
+.pp-label{font-size:9px;color:var(--gold);margin-bottom:6px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;}
+.spotify-embed-frame{width:100%;display:block;border:0;border-radius:12px;min-height:152px;background:var(--off);}
 .pod-loading{font-size:12px;color:var(--muted);font-style:italic;padding:1.25rem;}
 
 /* WRITING COL */
@@ -305,6 +304,43 @@ function loadMasthead() {
     });
 }
 
+
+function normalizeTitle(t) {
+  return (t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function extractSpotifyEpisodeIdFromText(text) {
+  if (!text) return null;
+  var patterns = [
+    /open\.spotify\.com\/episode\/([A-Za-z0-9]+)/i,
+    /spotify:episode:([A-Za-z0-9]+)/i,
+    /episode\/([A-Za-z0-9]{10,})/i
+  ];
+  for (var i = 0; i < patterns.length; i++) {
+    var m = text.match(patterns[i]);
+    if (m && m[1]) return m[1];
+  }
+  return null;
+}
+
+function getLatestEmbedHtml(episodeId) {
+  var src = episodeId
+    ? 'https://open.spotify.com/embed/episode/' + episodeId + '?utm_source=generator'
+    : 'https://open.spotify.com/embed/show/4VzKE07GR8k34v0ofkHyQx?utm_source=generator';
+  var height = episodeId ? 152 : 232;
+  return '<div class="pod-player">'
+    + '<div class="pp-label">Play episode</div>'
+    + '<iframe class="spotify-embed-frame"'
+    + ' src="' + src + '"'
+    + ' width="100%"'
+    + ' height="' + height + '"'
+    + ' frameborder="0"'
+    + ' allowfullscreen=""'
+    + ' loading="lazy"'
+    + ' allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
+    + '</div>';
+}
+
 function loadPodcast() {
   var el = document.getElementById('pod-content');
   fetch(RSS_PROXY + encodeURIComponent(RSS_URL))
@@ -312,22 +348,29 @@ function loadPodcast() {
     .then(function(d) {
       var ep = d.items && d.items[0];
       if (!ep) throw new Error('no items');
-      var audio = ep.enclosure && ep.enclosure.link ? ep.enclosure.link : '';
       var duration = ep.itunes_duration || '';
       var season = ep.itunes_season ? 'S' + ep.itunes_season : '';
       var epNum = ep.itunes_episode ? ':E' + ep.itunes_episode : '';
       var pubDate = ep.pubDate ? new Date(ep.pubDate).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '';
       var desc = (ep.description || '').replace(/<[^>]*>/g,'').substring(0,160);
-      var playerHTML = audio
-        ? '<div class="pod-player"><div class="pp-label">Play episode</div><audio controls><source src="' + audio + '" type="audio/mpeg"></audio></div>'
-        : '';
+      var rawCandidates = [
+        ep.link || '',
+        ep.guid || '',
+        ep.description || '',
+        ep.enclosure && ep.enclosure.link ? ep.enclosure.link : ''
+      ].filter(Boolean);
+      var episodeId = null;
+      for (var i = 0; i < rawCandidates.length; i++) {
+        episodeId = extractSpotifyEpisodeIdFromText(rawCandidates[i]);
+        if (episodeId) break;
+      }
       el.innerHTML =
         '<div class="pod-card">' +
-          '<div class="pod-badge">' + season + epNum + ' &middot; ' + pubDate + ' &middot; ' + duration + '</div>' +
+          '<div class="pod-badge">' + season + epNum + ' &middot; ' + pubDate + (duration ? ' &middot; ' + duration : '') + '</div>' +
           '<div class="pod-title">' + ep.title + '</div>' +
           '<div class="pod-meta">' + (ep.itunes_author || 'AI Spy') + '</div>' +
           '<div class="pod-desc">' + desc + '&hellip;</div>' +
-          playerHTML +
+          getLatestEmbedHtml(episodeId) +
           '<a href="podcast_page.html" style="font-size:11px;color:#c9a84c;display:block;margin-top:8px;">Browse all 32 episodes &rarr;</a>' +
         '</div>';
     })
@@ -336,14 +379,13 @@ function loadPodcast() {
         '<div class="pod-card">' +
           '<div class="pod-badge">S4:E1 &middot; Feb 11, 2026 &middot; 23:13</div>' +
           '<div class="pod-title">Forensic Cyberpsychology: How AI is Changing Crime and Human Behavior</div>' +
-          '<div class="pod-meta">Guest: James McDowell</div>' +
+          '<div class="pod-meta">AI Spy</div>' +
           '<div class="pod-desc">AI is changing how we communicate, what we trust, and how criminals manipulate people. James McDowell unpacks the human side of AI-enabled crime.</div>' +
-          '<div class="pod-player"><div class="pp-label">Listen on Spotify</div>' +
-          '<a href="podcast_page.html" style="color:#c9a84c;font-size:12px;">Browse all episodes &rarr;</a></div>' +
+          getLatestEmbedHtml('2Ou9dEeSytiWQfbFLnyW8J') +
+          '<a href="podcast_page.html" style="font-size:11px;color:#c9a84c;display:block;margin-top:8px;">Browse all 32 episodes &rarr;</a>' +
         '</div>';
     });
 }
-
 var now = new Date();
 document.getElementById('mh-date').textContent = now.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 loadMasthead();
