@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -702,14 +702,35 @@ if (latestBtn && latestPlayer) {
 // RSS loader â€” builds enclosure URL map from feed and injects new episodes
 (function() {
   var RSS = 'https://anchor.fm/s/e472a1e8/podcast/rss';
-  var PROXY = 'https://api.allorigins.win/get?url=';
   var LATEST = new Date('2026-02-11');
 
-  fetch(PROXY + encodeURIComponent(RSS))
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
+  // Two-proxy fallback chain: tries corsproxy.io first, falls back to allorigins
+  var PROXIES = [
+    {
+      wrap: function(u) { return 'https://corsproxy.io/?' + encodeURIComponent(u); },
+      parse: function(r) { return r.text(); }
+    },
+    {
+      wrap: function(u) { return 'https://api.allorigins.win/get?url=' + encodeURIComponent(u); },
+      parse: function(r) { return r.json().then(function(d) { return d.contents; }); }
+    }
+  ];
+
+  function tryProxy(index) {
+    if (index >= PROXIES.length) return;
+    var proxy = PROXIES[index];
+    fetch(proxy.wrap(RSS))
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return proxy.parse(r);
+      })
+      .then(function(xmlText) { handleFeed(xmlText); })
+      .catch(function() { tryProxy(index + 1); });
+  }
+
+  function handleFeed(xmlText) {
       var parser = new DOMParser();
-      var xml = parser.parseFromString(data.contents, 'text/xml');
+      var xml = parser.parseFromString(xmlText, 'text/xml');
       var items = Array.from(xml.querySelectorAll('item'));
 
       // Build title â†’ enclosure URL map from every item in the feed
@@ -825,8 +846,9 @@ if (latestBtn && latestPlayer) {
           });
         }
       }
-    })
-    .catch(function(){});
+  }
+
+  tryProxy(0);
 })();
 </script>
 </body>
