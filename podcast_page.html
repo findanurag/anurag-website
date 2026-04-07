@@ -854,6 +854,7 @@ document.querySelectorAll('.episode-row').forEach(function(row) {
 
 bindLatestButton();
 
+(function() {
   var RSS = 'https://anchor.fm/s/e472a1e8/podcast/rss';
   var RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
   var LATEST = new Date('2026-04-05');
