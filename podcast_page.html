@@ -237,6 +237,19 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
       <span class="season-title">Season 4 &middot; 2026</span>
       <span class="season-count" id="s4-count">2 episodes</span>
     </div>
+        <div class="episode-row">
+      <div class="ep-num-col">
+        <span class="ep-badge">S4:E2</span>
+        <div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-title">The Other End of the Wire</div>
+        <div class="ep-desc">Inside the scam compounds of South East Asia &mdash; human trafficking, organised crime, and the AI tools enabling industrial-scale fraud operations.</div>
+        <div class="ep-meta-row"><span class="ep-date">Apr 6, 2026</span><span class="ep-guest">Ling Li</span></div>
+        <span class="ep-topic t-scam">Scam Compounds</span><span class="ep-topic t-ai">AI &amp; Crime</span>
+      </div>
+      <div class="ep-right"><div class="ep-duration">31:56</div><span class="ep-arrow">&rarr;</span></div>
+    </div>
     <div class="episode-row">
       <div class="ep-num-col">
         <span class="ep-badge">S4:E1</span>
@@ -801,7 +814,11 @@ function attachPlayer(row, getMeta) {
       return;
     }
     closeAllPlayers();
-    var meta = getMeta() || null;
+    // Look up episode ID directly from title at click time
+    var titleEl = row.querySelector('.ep-title');
+    var key = normalizeTitle(titleEl ? titleEl.textContent : '');
+    var directId = EPISODE_IDS[key] || null;
+    var meta = directId ? { episodeId: directId } : (getMeta ? getMeta() : null);
     playerDiv.innerHTML = getEmbedHtml(meta, meta && meta.episodeId ? 152 : 232);
     playerDiv.classList.add('visible');
   });
@@ -832,13 +849,7 @@ function bindLatestButton() {
 seedTitleToEpisodeFromPage();
 
 document.querySelectorAll('.episode-row').forEach(function(row) {
-  var titleEl = row.querySelector('.ep-title');
-  var key = normalizeTitle(titleEl ? titleEl.textContent : '');
-  attachPlayer(row, function() {
-    if (titleToEpisode[key]) return titleToEpisode[key];
-    if (EPISODE_IDS[key]) return { episodeId: EPISODE_IDS[key], link: null, enclosure: null };
-    return null;
-  });
+  attachPlayer(row, null);
 });
 
 bindLatestButton();
