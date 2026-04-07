@@ -165,7 +165,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
 </nav>
 
 <div class="ticker">
-  <div class="ticker-item"><div class="ticker-dot"></div>32 Episodes &middot; 4 Seasons</div>
+  <div class="ticker-item"><div class="ticker-dot"></div><span id="ticker-ep-count">33</span> Episodes &middot; 4 Seasons</div>
   <div class="ticker-item"><div class="ticker-dot"></div>AI &middot; Fraud Prevention &middot; Financial Crime</div>
   <div class="ticker-item"><div class="ticker-dot"></div>Available on Spotify &middot; Apple Podcasts &middot; YouTube</div>
   <div class="ticker-item"><div class="ticker-dot"></div>New episodes when the story is worth telling</div>
@@ -209,19 +209,19 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
 <div class="latest-wrap">
   <div class="latest-card">
     <div>
-      <span class="latest-badge">Latest Episode &middot; S4:E1</span>
-      <div class="latest-title">Forensic Cyberpsychology: How AI is Changing Crime and Human Behavior</div>
-      <div class="latest-meta">February 11, 2026 &middot; Guest: James McDowell</div>
-      <div class="latest-desc">AI is changing more than workflows &mdash; it&rsquo;s changing how we communicate, what we trust, and how criminals manipulate people. In this episode, James McDowell joins to explore forensic cyberpsychology and what it reveals about the intersection of AI, crime, and human behaviour.</div>
+      <span class="latest-badge" id="latest-badge">Latest Episode &middot; S4:E2</span>
+      <div class="latest-title" id="latest-title">The Other End of the Wire</div>
+      <div class="latest-meta" id="latest-meta">April 6, 2026 &middot; Guest: Ling Li</div>
+      <div class="latest-desc" id="latest-desc">Inside the scam compounds of South East Asia. Ling Li joins to explore the intersection of human trafficking, organised crime, and AI-enabled fraud &mdash; and what the industry needs to understand about the human beings at both ends of the wire.</div>
       <div class="latest-actions">
         <button class="btn-listen" id="latest-play-btn">&#9654; Play Episode</button>
       </div>
       <div id="latest-player" class="ep-player"></div>
     </div>
     <div class="latest-right">
-      <div class="ep-badge-lg">Season 4 &middot; Episode 1</div>
+      <div class="ep-badge-lg" id="latest-ep-badge">Season 4 &middot; Episode 2</div>
       <div>
-        <div class="duration-lg">23:13</div>
+        <div class="duration-lg" id="latest-duration">31:56</div>
         <div class="duration-label">duration</div>
       </div>
     </div>
@@ -235,7 +235,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;jus
   <div class="season-section" data-season="s4">
     <div class="season-header">
       <span class="season-title">Season 4 &middot; 2026</span>
-      <span class="season-count">1 episode</span>
+      <span class="season-count" id="s4-count">2 episodes</span>
     </div>
     <div class="episode-row">
       <div class="ep-num-col">
@@ -641,6 +641,7 @@ function filterSeason(season, btn) {
 // To add a new episode: copy the Spotify episode URL, extract the ID after /episode/
 // Add one line: 'normalised-title-with-hyphens': 'SPOTIFY_ID',
 var EPISODE_IDS = {
+  'the-other-end-of-the-wire': '7tXzyPMm4oLidZW7mBeWnN',  // S4:E2
   'forensic-cyberpsychology-how-ai-is-changing-crime-and-human-behavior': '2Ou9dEeSytiWQfbFLnyW8J',
   'investigating-modern-fraud-a-law-enforcement-perspective': '71So9Ib6dqSyFwxFU9wZLu',
   'the-psychology-of-scams': '6AKcdF6nGu3SybNylJ0E80',
@@ -842,70 +843,99 @@ document.querySelectorAll('.episode-row').forEach(function(row) {
 
 bindLatestButton();
 
-(function() {
   var RSS = 'https://anchor.fm/s/e472a1e8/podcast/rss';
-  var PROXY = 'https://api.allorigins.win/get?url=';
-  var LATEST = new Date('2026-02-11');
+  var RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
+  var LATEST = new Date('2026-04-05');
 
-  fetch(PROXY + encodeURIComponent(RSS))
+  fetch(RSS2JSON + encodeURIComponent(RSS))
     .then(function(r) {
-      if (!r.ok) throw new Error('RSS request failed with status ' + r.status);
+      if (!r.ok) throw new Error('RSS request failed');
       return r.json();
     })
     .then(function(data) {
-      if (!data || !data.contents) throw new Error('RSS response was empty');
-      var parser = new DOMParser();
-      var xml = parser.parseFromString(data.contents, 'text/xml');
-      var items = Array.from(xml.querySelectorAll('item'));
+      if (!data || !data.items || !data.items.length) throw new Error('RSS empty');
+      var items = data.items;
 
+      // Build titleToEpisode map from rss2json items
       items.forEach(function(item) {
-        var titleEl = item.querySelector('title');
-        var title = titleEl ? titleEl.textContent : '';
-        var key = normalizeTitle(title);
-        var meta = extractEpisodeData(item);
-        if (key) titleToEpisode[key] = meta;
+        var key = normalizeTitle(item.title || '');
+        if (key) {
+          // Extract Spotify episode ID from item link or guid
+          var spotifyId = null;
+          var candidates = [item.link || '', item.guid || ''];
+          for (var i = 0; i < candidates.length; i++) {
+            var m = candidates[i].match(/spotify\.com\/episode\/([A-Za-z0-9]+)/);
+            if (m) { spotifyId = m[1]; break; }
+          }
+          // Fall back to hardcoded map
+          if (!spotifyId && EPISODE_IDS[key]) spotifyId = EPISODE_IDS[key];
+          titleToEpisode[key] = {
+            episodeId: spotifyId || EPISODE_IDS[key] || null,
+            link: item.link || null,
+            enclosure: item.enclosure ? item.enclosure.link : null
+          };
+        }
       });
 
-      var newEps = items.filter(function(item) {
-        var pd = item.querySelector('pubDate');
-        return pd ? new Date(pd.textContent) > LATEST : false;
-      });
-      if (!newEps.length) {
-        bindLatestButton();
-        return;
+      // Always update latest card from first RSS item
+      var ep = items[0];
+      if (ep) {
+        var lt = ep.title || '';
+        var ld = (ep.description || ep.content || '').replace(/<[^>]+>/g, '').trim().slice(0, 300) + '…';
+        var ldate = ep.pubDate ? new Date(ep.pubDate) : new Date();
+        var ldateStr = ldate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+        var duration = ep.itunes_duration || '';
+        var season = ep.itunes_season || '4';
+        var epnum = ep.itunes_episode || '';
+        var badgeLabel = 'Latest Episode · S' + season + (epnum ? ':E' + epnum : '');
+        var epBadgeLabel = 'Season ' + season + (epnum ? ' · Episode ' + epnum : '');
+
+        var titleEl = document.getElementById('latest-title');
+        var metaEl = document.getElementById('latest-meta');
+        var descEl = document.getElementById('latest-desc');
+        var badgeEl = document.getElementById('latest-badge');
+        var epBadgeEl = document.getElementById('latest-ep-badge');
+        var durEl = document.getElementById('latest-duration');
+
+        if (titleEl) titleEl.textContent = lt;
+        if (metaEl) metaEl.textContent = ldateStr;
+        if (descEl) descEl.textContent = ld;
+        if (badgeEl) badgeEl.textContent = badgeLabel;
+        if (epBadgeEl) epBadgeEl.textContent = epBadgeLabel;
+        if (durEl && duration) durEl.textContent = duration;
       }
+
+      // Update episode counts
+      var totalEps = items.length;
+      var epCountEl = document.getElementById('ep-count');
+      var tickerEl = document.getElementById('ticker-ep-count');
+      if (epCountEl) epCountEl.textContent = totalEps;
+      if (tickerEl) tickerEl.textContent = totalEps;
+
+      // Detect new episodes (published after LATEST cutoff)
+      var newEps = items.filter(function(item) {
+        var pd = item.pubDate;
+        return pd ? new Date(pd) > LATEST : false;
+      });
+
+      if (!newEps.length) { bindLatestButton(); return; }
 
       var s4 = document.querySelector('.season-section[data-season="s4"]');
-      if (!s4) {
-        bindLatestButton();
-        return;
-      }
+      if (!s4) { bindLatestButton(); return; }
 
       var firstRow = s4.querySelector('.episode-row');
       var existingCount = s4.querySelectorAll('.episode-row').length;
-      var sc = s4.querySelector('.season-count');
+      var sc = document.getElementById('s4-count');
       var newTotal = existingCount + newEps.length;
       if (sc) sc.textContent = newTotal + ' episode' + (newTotal !== 1 ? 's' : '');
 
-      var epCount = document.getElementById('ep-count');
-      if (epCount) {
-        var allRows = document.querySelectorAll('.episode-row').length + newEps.length;
-        epCount.textContent = allRows + ' episode' + (allRows !== 1 ? 's' : '');
-      }
-
       newEps.forEach(function(item) {
-        var titleEl = item.querySelector('title');
-        var title = titleEl ? titleEl.textContent : 'New Episode';
+        var title = item.title || 'New Episode';
         var key = normalizeTitle(title);
-        var descEl = item.querySelector('description');
-        var rawDesc = descEl ? descEl.textContent : '';
-        var desc = rawDesc.replace(/<[^>]+>/g, '').trim();
+        var desc = (item.description || '').replace(/<[^>]+>/g, '').trim();
         if (desc.length > 150) desc = desc.slice(0, 150) + '...';
-        var pd = item.querySelector('pubDate');
-        var pubDate = pd ? new Date(pd.textContent) : new Date();
-        var dateStr = pubDate.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
-        var durEl = item.querySelector('itunes\:duration') || item.querySelector('duration');
-        var duration = durEl ? durEl.textContent : '';
+        var pubDate = item.pubDate ? new Date(item.pubDate).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) : '';
+        var duration = item.itunes_duration || '';
 
         var row = document.createElement('div');
         row.className = 'episode-row';
@@ -913,7 +943,7 @@ bindLatestButton();
           + '<div class="ep-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div></div>'
           + '<div class="ep-body"><div class="ep-title">' + escapeHtml(title) + '</div>'
           + '<div class="ep-desc">' + escapeHtml(desc) + '</div>'
-          + '<div class="ep-meta-row"><span class="ep-date">' + escapeHtml(dateStr) + '</span></div>'
+          + '<div class="ep-meta-row"><span class="ep-date">' + escapeHtml(pubDate) + '</span></div>'
           + '<span class="ep-topic t-ai">New Episode</span></div>'
           + '<div class="ep-right"><div class="ep-duration">' + escapeHtml(duration) + '</div>'
           + '<span class="ep-arrow">&rarr;</span></div>';
@@ -922,32 +952,6 @@ bindLatestButton();
         if (firstRow) s4.insertBefore(row, firstRow);
         else s4.appendChild(row);
       });
-
-      var latest = newEps[0];
-      var card = document.querySelector('.latest-card');
-      if (latest && card) {
-        var lt = latest.querySelector('title') ? latest.querySelector('title').textContent : '';
-        var ldRaw = latest.querySelector('description') ? latest.querySelector('description').textContent : '';
-        var ld = ldRaw.replace(/<[^>]+>/g, '').trim().slice(0, 300);
-        var lpd = latest.querySelector('pubDate');
-        var ldate = lpd ? new Date(lpd.textContent) : new Date();
-        var ldateStr = ldate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-        var ldur = latest.querySelector('itunes\:duration') || latest.querySelector('duration');
-
-        var badge = card.querySelector('.latest-badge');
-        var titleNode = card.querySelector('.latest-title');
-        var metaNode = card.querySelector('.latest-meta');
-        var descNode = card.querySelector('.latest-desc');
-        var badgeLg = card.querySelector('.ep-badge-lg');
-        var durNode = card.querySelector('.duration-lg');
-
-        if (badge) badge.textContent = 'Latest Episode';
-        if (titleNode) titleNode.textContent = lt;
-        if (metaNode) metaNode.textContent = ldateStr;
-        if (descNode) descNode.textContent = ld;
-        if (badgeLg) badgeLg.textContent = 'New Episode';
-        if (durNode && ldur) durNode.textContent = ldur.textContent;
-      }
 
       bindLatestButton();
     })
